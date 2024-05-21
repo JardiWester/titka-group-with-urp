@@ -37,29 +37,20 @@ public class triggerCode : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("pipeTrigger"))
-        {
         connectedTrigger = null;
         hasReConected = true;
         attemptReconection = false;
-        }
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("pipeTrigger"))
-        {
-            connectedTrigger = other.gameObject;
-            hasReConected = true;
-            attemptReconection = false;
-        }
+        connectedTrigger = other.gameObject;
+        hasReConected = true;
+        attemptReconection = false;
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("pipeTrigger"))
-        {
         hasReConected = true;
         attemptReconection = false;
-        }
     }
     public void checkConectedTriggers()
     {

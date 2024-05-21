@@ -38,8 +38,6 @@ public class winGridCode : MonoBehaviour
         {   
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
-            
-            cameraTransitions.Instance.resetCameras();
         } 
 
     }

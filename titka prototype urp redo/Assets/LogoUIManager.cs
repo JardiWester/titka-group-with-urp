@@ -6,7 +6,7 @@ public class InputUIManager : MonoBehaviour
   
 {
     InterractController InterractControllerr;
-    [SerializeField] private GameObject KeybindIndicator; // Reference to the UI Image GameObject (your logo)
+    public GameObject KeybindIndicator; // Reference to the UI Image GameObject (your logo)
     private bool isLoaded = false; // Flag to track whether the logo is currently loaded
 
     private void Start()
@@ -21,13 +21,12 @@ public class InputUIManager : MonoBehaviour
         if (KeybindIndicator != null && !isLoaded)
         {
             // Position the logo at the specified position
-            gameObject.transform.position = position ;
+            KeybindIndicator.transform.position = position ;
 
             
 
             // Activate the logo
             KeybindIndicator.SetActive(true);
-            gameObject.transform.LookAt(Camera.main.transform);
 
             Debug.Log("Image should be loaded");
             isLoaded = true;
@@ -57,7 +56,7 @@ public class InputUIManager : MonoBehaviour
     {
 
         // Make the logo always face the player camera
-        gameObject.transform.LookAt(Camera.main.transform);
+        KeybindIndicator.transform.LookAt(Camera.main.transform);
     }
 
 }

@@ -9,56 +9,81 @@ using UnityEngine.UI;
 
 public class Inv_open : MonoBehaviour
 
-{
-    public Image page1Image;
-    public Image page2Image;
 
-   
+{
+    public List<Image> pages = new List<Image>(); // List to store references to all pages
+    private int currentPageIndex = 0; // Index of the current active page
 
     private void Start()
     {
-        // Deactivate the images when the game starts
-        page1Image.gameObject.SetActive(false);
-        page2Image.gameObject.SetActive(false);
+        // Deactivate all pages when the game starts
+        foreach (Image page in pages)
+        {
+            page.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        // Toggle page when E is pressed
         if (Input.GetKeyDown(KeyCode.E))
         {
             TogglePage();
+            
         }
     }
 
-    
-
     public void NextPage()
     {
-        Debug.Log("Switching page...");
+        // Deactivate the current page
+        pages[currentPageIndex].gameObject.SetActive(false);
 
-        if (page1Image.gameObject.activeSelf)
+        // Increment the page index
+        currentPageIndex++;
+
+        // Wrap around if we've reached the end of the list
+        if (currentPageIndex >= pages.Count)
         {
-            page1Image.gameObject.SetActive(false);
-            page2Image.gameObject.SetActive(true);
+            currentPageIndex = 0;
         }
+
+        // Activate the new current page
+        pages[currentPageIndex].gameObject.SetActive(true);
     }
 
     public void LastPage()
     {
-        Debug.Log("Switching page...");
+        // Deactivate the current page
+        pages[currentPageIndex].gameObject.SetActive(false);
 
-        if (page2Image.gameObject.activeSelf)
+        // Increment the page index
+        currentPageIndex--;
+
+        // Wrap around if we've reached the start of the list
+        if (currentPageIndex < 0)
         {
-            page2Image.gameObject.SetActive(false);
-            page1Image.gameObject.SetActive(true);
+            currentPageIndex = 4;
         }
+
+        // Activate the new current page
+        pages[currentPageIndex].gameObject.SetActive(true);
     }
 
     public void TogglePage()
     {
-        Debug.Log("Toggling page1Image...");
+        if (pages[currentPageIndex].gameObject.activeSelf)
+        {
+            
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            pages[currentPageIndex].gameObject.SetActive(false);
+        } else
+        {
+            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            pages[currentPageIndex].gameObject.SetActive(true);
 
-        // Toggle the active state of page1Image
-        page1Image.gameObject.SetActive(!page1Image.gameObject.activeSelf);
+        }
     }
 }

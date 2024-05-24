@@ -1,24 +1,31 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 
 public class Interractable : MonoBehaviour
 {
-    public Transform player; // Reference to the player object
     public Renderer objectRenderer; // Reference to the renderer of the object
     // Material with emission property to make the object glow
     public Material glowingMaterial;
+
+    public Transform player; // Reference to the player object
     
-    // Default material
-    private Material defaultMaterial;
+    private Material defaultMaterial;// Default material
+    public Transform ParkHere; //reference to where the boat teleports after player gets off the boat
     public Transform SitHere; //reference to where the player sits down after interacting
     public bool satDown = false;
-    public CinemachineFreeLook freeLookCamera;
-    
+    public bool canPark = true;
+    //public CinemachineFreeLook freeLookCamera;
+
+    //[SerializeField] private CinemachineVirtualCamera newCam;
+    [SerializeField] private CinemachineFreeLook playerCam;
+
+
     private void Start()
     {
+        objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null)
         {
             defaultMaterial = objectRenderer.material;
@@ -26,28 +33,33 @@ public class Interractable : MonoBehaviour
     }
     public void interract()
     {
+        //Debug.Log("send flare now");
+        //cameraTransitions.Instance.switchCameras(playerCam);
         // Check if the object has the "Puzzle" tag
         if (gameObject.CompareTag("Puzzle"))
         {
-            Debug.Log("Object has the Puzzle tag");
 
         }
         else if (gameObject.CompareTag("Ride"))
         {
             if (SitHere != null & satDown == false)
             {
+                Debug.Log("sit on the ride");
+                //get on the boat
                 player.position = SitHere.position;
                 player.SetParent(SitHere);
                 player.GetComponent<Movement>().enabled = false;
                 satDown = true;
-                freeLookCamera.Priority = 8;
+                playerCam.Priority = 8;
             }
-            else if (SitHere != null & satDown == true)
+            else if (SitHere != null & satDown & canPark)
             {
+                Debug.Log("get off da boat and park brah");
                 //get off the boat
+                transform.position = ParkHere.position;
                 player.SetParent(null);
-                satDown = false;
-                freeLookCamera.Priority = 10;
+                satDown = false;               
+                playerCam.Priority = 10;
                 player.GetComponent<Movement>().enabled = true;
             }
             else
@@ -58,10 +70,13 @@ public class Interractable : MonoBehaviour
         }
         else if (gameObject.CompareTag("Interact"))
         {
-            Debug.Log("Object has the Interact tag");
-            
-        }
 
+            if (objectRenderer != null && glowingMaterial != null)
+            {
+                // Apply glowing material to the object renderer
+                objectRenderer.material = glowingMaterial;
+            }
+        }
     }
 
     public void glow()

@@ -55,7 +55,7 @@ void Start()
         if (direction.magnitude >= 0.1f)
         {
             playerAnim.SetBool("AnimWalk", true);
-            Debug.Log("WALK NOW BRAH");
+           
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -66,7 +66,7 @@ void Start()
         else
         {
             playerAnim.SetBool("AnimWalk", false);
-            Debug.Log("STOP WALKING BRAH");
+            
         }
 
         

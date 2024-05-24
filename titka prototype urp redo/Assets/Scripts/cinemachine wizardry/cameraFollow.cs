@@ -62,7 +62,7 @@ public class cameraFollow : MonoBehaviour
 
         if(routeToGo > routes.Length - 1)
         {
-            transitionScript.switchCameras();
+           // transitionScript.switchCameras();
         }else{
             coroutineAllowed = true;
         }

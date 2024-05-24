@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class BoatMovement : MonoBehaviour
 {
-    
+
     public float accelerationForce = 10f;
     public float turnSmoothTime = 0.1f;
     public float turnSpeed = 100f; // Added turn speed
@@ -20,41 +21,67 @@ public class BoatMovement : MonoBehaviour
     {
         boatRigidbody = GetComponent<Rigidbody>();
     }
-
-    private void Update()
+    void OnTriggerEnter(Collider other)
     {
-        float vertical = -Input.GetAxisRaw("Vertical");
-
-        if (Interractable != null && Interractable.satDown)
+        // Check if the GameObject involved in the trigger event is named "BoatPark"
+        if (other.gameObject.name == "BoatPark")
         {
-            // Movement
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            Vector3 direction = accelerationForce * vertical * transform.forward;
+            Debug.Log("Trigger detected with BoatPark!");
+            //Interractable.canPark = true;
+        }else
+        {
 
-            if (direction.magnitude >= 0.1f)
-            {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-                float angle = targetAngle;    //Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                controller.Move(moveDir.normalized * accelerationForce * Time.deltaTime);
-            }
-
-            // Rotation
-            horizontalInput = Input.GetAxis("Horizontal");
-            if (Mathf.Abs(horizontalInput) > 0.1f)
-            {
-                RotateBoat(horizontalInput);
-            }
         }
     }
+    private void Update()
+    {
 
+       float vertical = -Input.GetAxisRaw("Vertical");
+
+            if (Interractable != null && Interractable.satDown)
+            {
+                // Movement
+                float horizontal = Input.GetAxisRaw("Horizontal");
+                Vector3 direction = accelerationForce * vertical * transform.forward;
+
+                if (direction.magnitude >= 0.1f)
+                {
+                    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+                    float angle = targetAngle;    //Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                    controller.Move(moveDir.normalized * accelerationForce * Time.deltaTime);
+                }
+
+                // Rotation
+                horizontalInput = Input.GetAxis("Horizontal");
+                if (Mathf.Abs(horizontalInput) > 0.1f)
+                {
+                    RotateBoat(horizontalInput);
+                }
+            }    
+
+
+
+    }
     private void RotateBoat(float input)
+
     {
         float rotationAmount = input * turnSpeed * Time.deltaTime;
         Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
         boatRigidbody.MoveRotation(boatRigidbody.rotation * deltaRotation);
     }
+
+    
+
+
+
+
+
+
+
+
 }
+
 
 
 

@@ -21,12 +21,12 @@ public class InputUIManager : MonoBehaviour
         if (KeybindIndicator != null && !isLoaded)
         {
             // Position the logo at the specified position
-            gameObject.transform.position = position ;         
+           // gameObject.transform.position = position ;         
             // Activate the logo
             KeybindIndicator.SetActive(true);
             gameObject.transform.LookAt(Camera.main.transform);           
             isLoaded = true;
-            Debug.Log("press f brah");
+            
         }
     }
 

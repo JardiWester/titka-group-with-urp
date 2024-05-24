@@ -7,78 +7,72 @@ public class BoatMovement : MonoBehaviour
 {
 
     public float accelerationForce = 10f;
-    public float turnSmoothTime = 0.1f;
-    public float turnSpeed = 100f; // Added turn speed
+    public float turnSpeed = 100f;
 
-    public Transform cameraTransform;
     public CharacterController controller;
     public Interractable Interractable;
-
+    [SerializeField] public GameObject FtoPark;
     private Rigidbody boatRigidbody;
-    private float horizontalInput;
 
     private void Start()
     {
         boatRigidbody = GetComponent<Rigidbody>();
+        FtoPark.SetActive(false);
     }
+
     void OnTriggerEnter(Collider other)
     {
-        // Check if the GameObject involved in the trigger event is named "BoatPark"
         if (other.gameObject.name == "BoatPark")
         {
             Debug.Log("Trigger detected with BoatPark!");
-            //Interractable.canPark = true;
-        }else
+            Interractable.canPark = true;
+            FtoPark.SetActive(true);
+        }
+        else
         {
-
+            Debug.Log("park spot name for boat is not set correctly");
         }
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "BoatPark")
+        {
+            Interractable.canPark = false;
+        }
+        else
+        {
+            Debug.Log("park spot name for boat is not set correctly");
+            FtoPark.SetActive(false);
+        }
+    }
+
+ 
+
     private void Update()
     {
+        if (Interractable != null && Interractable.satDown)
+        {
+            // Movement
+            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
 
-       float vertical = -Input.GetAxisRaw("Vertical");
+            Vector3 forwardMovement = -transform.forward * vertical * accelerationForce * Time.deltaTime;
+            controller.Move(forwardMovement);
 
-            if (Interractable != null && Interractable.satDown)
+            // Rotation
+            if (Mathf.Abs(horizontal) > 0.1f)
             {
-                // Movement
-                float horizontal = Input.GetAxisRaw("Horizontal");
-                Vector3 direction = accelerationForce * vertical * transform.forward;
-
-                if (direction.magnitude >= 0.1f)
-                {
-                    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-                    float angle = targetAngle;    //Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-                    controller.Move(moveDir.normalized * accelerationForce * Time.deltaTime);
-                }
-
-                // Rotation
-                horizontalInput = Input.GetAxis("Horizontal");
-                if (Mathf.Abs(horizontalInput) > 0.1f)
-                {
-                    RotateBoat(horizontalInput);
-                }
-            }    
-
-
-
+                RotateBoat(horizontal);
+            }
+        }
     }
-    private void RotateBoat(float input)
 
+    private void RotateBoat(float input)
     {
         float rotationAmount = input * turnSpeed * Time.deltaTime;
-        Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
-        boatRigidbody.MoveRotation(boatRigidbody.rotation * deltaRotation);
+        transform.Rotate(0f, rotationAmount, 0f);
     }
-
-    
-
-
-
-
-
-
-
 
 }
 

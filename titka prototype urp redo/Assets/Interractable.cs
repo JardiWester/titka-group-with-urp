@@ -15,6 +15,7 @@ public class Interractable : MonoBehaviour
     private Material defaultMaterial;// Default material
     public Transform ParkHere; //reference to where the boat teleports after player gets off the boat
     public Transform SitHere; //reference to where the player sits down after interacting
+    public Transform teleportPlayer; //reference to where the player sits down after interacting
     public bool satDown = false;
     public bool canPark = true;
     //public CinemachineFreeLook freeLookCamera;
@@ -47,20 +48,22 @@ public class Interractable : MonoBehaviour
                 Debug.Log("sit on the ride");
                 //get on the boat
                 player.position = SitHere.position;
-                player.SetParent(SitHere);
+                player.SetParent(SitHere);                              
                 player.GetComponent<Movement>().enabled = false;
                 satDown = true;
                 playerCam.Priority = 8;
             }
-            else if (SitHere != null & satDown & canPark)
+            else if (SitHere != null & satDown & canPark == true)
             {
-                Debug.Log("get off da boat and park brah");
+                Debug.Log("get off da boat and park brah teleport");
                 //get off the boat
-                transform.position = ParkHere.position;
-                player.SetParent(null);
+                transform.position = ParkHere.position; //teleport the boat to ther parking spot
+                player.position = teleportPlayer.position; //teleport the player to the shore when boat is parked
+                transform.rotation = Quaternion.identity; // Reset the rotation of the boat 
+                player.SetParent(null); 
                 satDown = false;               
-                playerCam.Priority = 10;
-                player.GetComponent<Movement>().enabled = true;
+                playerCam.Priority = 10; //change back tot he player camera
+                player.GetComponent<Movement>().enabled = true; //let the player move again 
             }
             else
             {

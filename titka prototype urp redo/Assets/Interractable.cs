@@ -23,7 +23,7 @@ public class Interractable : MonoBehaviour
     //[SerializeField] private CinemachineVirtualCamera newCam;
     [SerializeField] private CinemachineFreeLook playerCam;
 
-
+    public Animator playerAnim;
     private void Start()
     {
         objectRenderer = GetComponent<Renderer>();
@@ -48,6 +48,7 @@ public class Interractable : MonoBehaviour
                 Debug.Log("sit on the ride");
                 //get on the boat
                 player.position = SitHere.position;
+                playerAnim.SetBool("SitDown", true); // sit down animation
                 player.SetParent(SitHere);                              
                 player.GetComponent<Movement>().enabled = false;
                 satDown = true;
@@ -59,6 +60,7 @@ public class Interractable : MonoBehaviour
                 //get off the boat
                 transform.position = ParkHere.position; //teleport the boat to ther parking spot
                 player.position = teleportPlayer.position; //teleport the player to the shore when boat is parked
+                playerAnim.SetBool("SitDown", false); // sit down animation
                 transform.rotation = Quaternion.identity; // Reset the rotation of the boat 
                 player.SetParent(null); 
                 satDown = false;               

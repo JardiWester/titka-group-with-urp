@@ -9,7 +9,7 @@ public class cameraTransitions : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera activeCam;
     [SerializeField] private cameraFollow camFollowScript;
     [SerializeField] private Movement playerMovement;
-    
+
 
 
     public static cameraTransitions Instance { get; private set; }
@@ -29,7 +29,7 @@ public class cameraTransitions : MonoBehaviour
         // Optional: Persist this instance between scenes
         // DontDestroyOnLoad(gameObject);
     }
-    
+
     /*void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player"){
@@ -51,14 +51,25 @@ public class cameraTransitions : MonoBehaviour
             camFollowScript.coroutineAllowed = true;
         }
     }*/
-    public void switchCameras(CinemachineVirtualCamera newCam)
+    public void switchCameras(CinemachineVirtualCamera newCam, bool unlockMouse = false)
     {
+        if (unlockMouse)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         if (activeCam)
         {
             activeCam.Priority = 0;
             newCam.Priority = 1;
             activeCam = newCam;
-        }else 
+        }
+        else
         {
             playerMovement.enabled = false;
             playerCam.Priority = 0;
@@ -68,12 +79,11 @@ public class cameraTransitions : MonoBehaviour
     }
     public void resetCameras()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         playerCam.Priority = 1;
-        if (activeCam != null)
-        {
-            activeCam.Priority = 0;
-            activeCam = null;
-        }
+        activeCam.Priority = 0;
+        activeCam = null;
         playerMovement.enabled = true;
     }
 }

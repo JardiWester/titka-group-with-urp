@@ -18,6 +18,11 @@ public class Interractable : MonoBehaviour
     public Transform teleportPlayer; //reference to where the player sits down after interacting
     public bool satDown = false;
     public bool canPark = true;
+
+    [SerializeField] private CinemachineVirtualCamera newCam;
+    public bool oneTimeInteraction;
+    public bool hasInteracted = false;
+
     //public CinemachineFreeLook freeLookCamera;
 
     //[SerializeField] private CinemachineVirtualCamera newCam;
@@ -39,32 +44,51 @@ public class Interractable : MonoBehaviour
         // Check if the object has the "Puzzle" tag
         if (gameObject.CompareTag("Puzzle"))
         {
+            if (oneTimeInteraction)
+            {
+                hasInteracted = true;
+            }
+            
+
+            cameraTransitions.Instance.switchCameras(newCam, true);
+
+            if (objectRenderer != null && glowingMaterial != null)
+            {
+                // Apply glowing material to the object renderer
+                objectRenderer.material = glowingMaterial;
+            }
 
         }
         else if (gameObject.CompareTag("Ride"))
+
         {
+
             if (SitHere != null & satDown == false)
             {
                 Debug.Log("sit on the ride");
                 //get on the boat
+                player.SetParent(SitHere);
                 player.position = SitHere.position;
                 playerAnim.SetBool("SitDown", true); // sit down animation
-                player.SetParent(SitHere);                              
+                
+                SitHere.Rotate(0, -90, 0);
                 player.GetComponent<Movement>().enabled = false;
                 satDown = true;
                 playerCam.Priority = 8;
             }
             else if (SitHere != null & satDown & canPark == true)
             {
-                Debug.Log("get off da boat and park brah teleport");
+                
                 //get off the boat
-                transform.position = ParkHere.position; //teleport the boat to ther parking spot
+                player.SetParent(null);
+                
                 player.position = teleportPlayer.position; //teleport the player to the shore when boat is parked
-                playerAnim.SetBool("SitDown", false); // sit down animation
+                transform.position = ParkHere.position; //teleport the boat to ther parking spot                
                 transform.rotation = Quaternion.identity; // Reset the rotation of the boat 
-                player.SetParent(null); 
+                
                 satDown = false;               
                 playerCam.Priority = 10; //change back tot he player camera
+                playerAnim.SetBool("SitDown", false); // sit down animation
                 player.GetComponent<Movement>().enabled = true; //let the player move again 
             }
             else
@@ -75,6 +99,21 @@ public class Interractable : MonoBehaviour
         }
         else if (gameObject.CompareTag("Interact"))
         {
+
+            if (objectRenderer != null && glowingMaterial != null)
+            {
+                // Apply glowing material to the object renderer
+                objectRenderer.material = glowingMaterial;
+            }
+        } else
+        {
+            if (oneTimeInteraction)
+            {
+                hasInteracted = true;
+            }
+
+
+            cameraTransitions.Instance.switchCameras(newCam, true);
 
             if (objectRenderer != null && glowingMaterial != null)
             {

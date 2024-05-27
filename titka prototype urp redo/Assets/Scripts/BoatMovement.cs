@@ -11,13 +11,13 @@ public class BoatMovement : MonoBehaviour
 
     public CharacterController controller;
     public Interractable Interractable;
-    [SerializeField] public GameObject FtoPark;
+    
     private Rigidbody boatRigidbody;
 
     private void Start()
     {
         boatRigidbody = GetComponent<Rigidbody>();
-        FtoPark.SetActive(false);
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,7 +26,7 @@ public class BoatMovement : MonoBehaviour
         {
             Debug.Log("Trigger detected with BoatPark!");
             Interractable.canPark = true;
-            FtoPark.SetActive(true);
+            
         }
         else
         {
@@ -43,7 +43,7 @@ public class BoatMovement : MonoBehaviour
         else
         {
             Debug.Log("park spot name for boat is not set correctly");
-            FtoPark.SetActive(false);
+           
         }
     }
 

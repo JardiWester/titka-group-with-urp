@@ -219,7 +219,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.29782063
+  - screenRelativeHeight: 0.5014837
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2177308355739012371}
@@ -229,17 +229,16 @@ LODGroup:
     - renderer: {fileID: 3860398416629728508}
     - renderer: {fileID: 7076525635164869140}
     - renderer: {fileID: 4085498931603830020}
-  - screenRelativeHeight: 0.197178
+  - screenRelativeHeight: 0.1306741
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2374614231544845806}
     - renderer: {fileID: 7593416171396981996}
     - renderer: {fileID: 3860398416629728508}
-  - screenRelativeHeight: 0.10401424
+  - screenRelativeHeight: 0.053510133
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2374614231544845806}
-    - renderer: {fileID: 7593416171396981996}
   m_Enabled: 1
 --- !u!1 &3799235678875956997
 GameObject:

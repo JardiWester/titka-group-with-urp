@@ -18,7 +18,7 @@ public class Interractable : MonoBehaviour
     public Transform teleportPlayer; //reference to where the player sits down after interacting
     public bool satDown = false;
     public bool canPark = true;
-
+    [SerializeField] private CinemachineFreeLook boatCam;
     [SerializeField] private CinemachineVirtualCamera newCam;
     public bool oneTimeInteraction;
     public bool hasInteracted = false;
@@ -74,7 +74,8 @@ public class Interractable : MonoBehaviour
                 SitHere.Rotate(0, -90, 0);
                 player.GetComponent<Movement>().enabled = false;
                 satDown = true;
-                playerCam.Priority = 8;
+                playerCam.Priority = 0;
+                boatCam.Priority = 1;
             }
             else if (SitHere != null & satDown & canPark == true)
             {
@@ -90,6 +91,8 @@ public class Interractable : MonoBehaviour
                 playerCam.Priority = 10; //change back tot he player camera
                 playerAnim.SetBool("SitDown", false); // sit down animation
                 player.GetComponent<Movement>().enabled = true; //let the player move again 
+                playerCam.Priority = 1;
+                boatCam.Priority = 0;
             }
             else
             {

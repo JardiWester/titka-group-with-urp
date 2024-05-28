@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class winGridCode : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class winGridCode : MonoBehaviour
     [SerializeField] private List<GameObject> winTriggersInGrid;
     [SerializeField] private bool allAreConnected;
     [SerializeField] private GameObject winIndicator;
+    public Sprite WinPage;
+    public bool hasToBeConnected = true;
 
     void Start()
     {
@@ -29,16 +32,18 @@ public class winGridCode : MonoBehaviour
             {
                 //if any of them arent connected, it sets it to false
                 allAreConnected = false;
-                break; 
+                break;
                 //stop checking, it is futile, you've already lost, it's too late
             }
         }
 
         if (allAreConnected == true && winCheck == false)
-        {   
+        {
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
-        } 
+
+            cameraTransitions.Instance.resetCameras();
+        }
 
     }
 

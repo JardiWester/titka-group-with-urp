@@ -6,8 +6,10 @@ using UnityEngine;
 public class BoatMovement : MonoBehaviour
 {
 
-    public float accelerationForce = 10f;
-    public float turnSpeed = 100f;
+    [SerializeField] private float accelerationForce = 10f;
+    [SerializeField] private float turnSpeed = 100f;
+    [SerializeField] private float sprintSpeed = 35f;
+
 
     public CharacterController controller;
     public Interractable Interractable;
@@ -51,13 +53,16 @@ public class BoatMovement : MonoBehaviour
 
     private void Update()
     {
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        float currentSpeed = isSprinting ? sprintSpeed : accelerationForce;
+
         if (Interractable != null && Interractable.satDown)
         {
             // Movement
             float vertical = Input.GetAxis("Vertical");
             float horizontal = Input.GetAxis("Horizontal");
 
-            Vector3 forwardMovement = -transform.forward * vertical * accelerationForce * Time.deltaTime;
+            Vector3 forwardMovement = -transform.forward * vertical * currentSpeed * Time.deltaTime;
             controller.Move(forwardMovement);
 
             // Rotation

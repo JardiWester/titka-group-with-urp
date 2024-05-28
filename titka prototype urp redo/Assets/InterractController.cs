@@ -68,7 +68,7 @@ public class InterractController : MonoBehaviour
                     // Call the interract method on the interractable instance of the current puzzle
                     interractables[i].interract();
                     InputUIManager.HideLogo();
-                    
+                    InputUIManager.exclamationMark.SetActive(false);
                 }
             }
             else

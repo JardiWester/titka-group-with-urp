@@ -11,7 +11,7 @@ public class MoveBoat : MonoBehaviour
     public Interractable Interractable;
     void Update()
     {
-        if (Interractable.satDown)
+        if (Interractable.satDown == true)
         {
             // Get input
             float moveInput = Input.GetAxis("Vertical"); // W (1) / S (-1)

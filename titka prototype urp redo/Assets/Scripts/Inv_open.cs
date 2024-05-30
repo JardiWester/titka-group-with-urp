@@ -73,13 +73,14 @@ public class Inv_open : MonoBehaviour
     {
         if (pages[currentPageIndex].gameObject.activeSelf)
         {
-            
-            Cursor.visible = false;
+            //close the book
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
             pages[currentPageIndex].gameObject.SetActive(false);
         } else
         {
-            
+            //open the book
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             pages[currentPageIndex].gameObject.SetActive(true);

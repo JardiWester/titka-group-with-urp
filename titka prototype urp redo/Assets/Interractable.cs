@@ -22,6 +22,7 @@ public class Interractable : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera newCam;
     public bool oneTimeInteraction;
     public bool hasInteracted = false;
+    public bool ActivateDialogue = false;
 
     //public CinemachineFreeLook freeLookCamera;
 
@@ -51,12 +52,16 @@ public class Interractable : MonoBehaviour
             
 
             cameraTransitions.Instance.switchCameras(newCam, true);
+            ActivateDialogue = true;
+            Debug.Log("activate dialogue");
 
             if (objectRenderer != null && glowingMaterial != null)
             {
                 // Apply glowing material to the object renderer
                 objectRenderer.material = glowingMaterial;
             }
+
+            
 
         }
         else if (gameObject.CompareTag("Ride"))

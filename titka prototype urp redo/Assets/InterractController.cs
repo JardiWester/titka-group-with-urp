@@ -6,7 +6,7 @@ using UnityEngine;
 public class InterractController : MonoBehaviour
 {
     public Transform player; // Reference to the player object
-    [SerializeField] private List<Transform> puzzles; // List of references to the puzzles
+    [SerializeField] public List<Transform> puzzles; // List of references to the puzzles
     [SerializeField] public float distanceThreshold = 10f; // Threshold distance for your condition
     public InputUIManager InputUIManager; // Reference to the script handling UI image instantiation
 

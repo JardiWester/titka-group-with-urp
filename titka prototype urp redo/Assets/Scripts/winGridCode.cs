@@ -9,8 +9,10 @@ public class winGridCode : MonoBehaviour
     [SerializeField] private List<GameObject> winTriggersInGrid;
     [SerializeField] private bool allAreConnected;
     [SerializeField] private GameObject winIndicator;
-    public Sprite WinPage;
+    //public Sprite WinPage;
     public bool hasToBeConnected = true;
+    public PageManager PageManager;
+    
 
     void Start()
     {
@@ -41,8 +43,8 @@ public class winGridCode : MonoBehaviour
         {
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
-
             cameraTransitions.Instance.resetCameras();
+            //PageManager.CompletePuzzle(1);
         }
 
     }

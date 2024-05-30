@@ -11,15 +11,17 @@ public class Inv_open : MonoBehaviour
 
 
 {
-    public List<Image> pages = new List<Image>(); // List to store references to all pages
+    public List<GameObject> pages = new List<GameObject>(); // List to store references to all pages
     private int currentPageIndex = 0; // Index of the current active page
-
+    //public InterractController interractController;
+    
     private void Start()
     {
         // Deactivate all pages when the game starts
-        foreach (Image page in pages)
+        foreach (GameObject page in pages)
         {
             page.gameObject.SetActive(false);
+           
         }
     }
 
@@ -62,7 +64,7 @@ public class Inv_open : MonoBehaviour
         // Wrap around if we've reached the start of the list
         if (currentPageIndex < 0)
         {
-            currentPageIndex = 4;
+            currentPageIndex = 2;
         }
 
         // Activate the new current page
@@ -86,5 +88,10 @@ public class Inv_open : MonoBehaviour
             pages[currentPageIndex].gameObject.SetActive(true);
 
         }
+
+
     }
+
+    
+
 }

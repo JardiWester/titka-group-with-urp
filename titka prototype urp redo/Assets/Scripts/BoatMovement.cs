@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoatMovement : MonoBehaviour
 {
-    
+    /*
     public float accelerationForce = 10f;
     public float turnSmoothTime = 0.1f;
     public float turnSpeed = 100f; // Added turn speed
@@ -54,6 +54,7 @@ public class BoatMovement : MonoBehaviour
         Quaternion deltaRotation = Quaternion.Euler(0f, rotationAmount, 0f);
         boatRigidbody.MoveRotation(boatRigidbody.rotation * deltaRotation);
     }
+    */
 }
 
 

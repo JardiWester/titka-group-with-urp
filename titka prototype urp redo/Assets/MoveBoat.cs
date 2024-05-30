@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MoveBoat : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of the boat movement
+    /*public float moveSpeed = 5f; // Speed of the boat movement
     public float rotationSpeed = 100f; // Speed of the boat rotation
     public Interractable Interractable;
     void Update()
@@ -40,6 +40,6 @@ public class MoveBoat : MonoBehaviour
                 transform.Rotate(Vector3.up, turnInput * rotationSpeed * Time.deltaTime);
             }
         }
-    }
+    }*/
 
 }

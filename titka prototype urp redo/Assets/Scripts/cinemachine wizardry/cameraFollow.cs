@@ -13,7 +13,7 @@ public class cameraFollow : MonoBehaviour
 
     private Vector3 objectPosition;
 
-    private float speedModifier;
+    [SerializeField] private float speedModifier;
 
     public bool coroutineAllowed;
     private Vector3 oldPos;
@@ -25,7 +25,6 @@ public class cameraFollow : MonoBehaviour
         oldRotation = gameObject.transform.rotation.y;
         routeToGo = 0;
         tParam = 0f;
-        speedModifier = 0.2f;
     }
 
     void Update()
@@ -62,7 +61,7 @@ public class cameraFollow : MonoBehaviour
 
         if(routeToGo > routes.Length - 1)
         {
-            transitionScript.switchCameras();
+            cameraTransitions.Instance.resetCameras();
         }else{
             coroutineAllowed = true;
         }

@@ -9,7 +9,7 @@ public class cameraTransitions : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera activeCam;
     [SerializeField] private cameraFollow camFollowScript;
     [SerializeField] private Movement playerMovement;
-
+    [SerializeField] private CinemachineFreeLook boatCam;
 
 
     public static cameraTransitions Instance { get; private set; }
@@ -77,13 +77,27 @@ public class cameraTransitions : MonoBehaviour
             activeCam = newCam;
         }
     }
-    public void resetCameras()
+    public void resetCameras(bool turnOnBoatCamera = false)
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        playerCam.Priority = 1;
+        
         activeCam.Priority = 0;
         activeCam = null;
-        playerMovement.enabled = true;
+
+        if (turnOnBoatCamera)
+        {
+           playerMovement.enabled = false;
+            boatCam.Priority = 1;
+        }
+        else
+        {
+            playerMovement.enabled = true;
+            if (boatCam)
+            {
+                boatCam.Priority = 0;
+            }
+            playerCam.Priority = 1;
+        }
     }
 }

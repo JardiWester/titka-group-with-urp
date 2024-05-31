@@ -15,10 +15,10 @@ public class PageManager : MonoBehaviour
     public List<bool> puzzleDone = new List<bool>();
     private bool[] puzzleCompletionStatus; // Array to track puzzle completion
     public GameObject PlayerContainer;
-    private Movement PlayerMovementScript;
+    //private Movement PlayerMovementScript;
     private CinemachineFreeLook playerCamera;
-    private float CamSpeedX;
-    private float CamSpeedY;
+    //private float CamSpeedX;
+    //private float CamSpeedY;
     private int currentFullPageIndex = 0; // To track the current full page being displayed
 
     void Start()
@@ -34,24 +34,26 @@ public class PageManager : MonoBehaviour
 
         // Initialize comic book display with placeholders
         DisplayPages(currentFullPageIndex); // Display the first set of pages (1 and 2)
-        playerCamera = PlayerContainer.GetComponentInChildren<CinemachineFreeLook>();
+
+        /*playerCamera = PlayerContainer.GetComponentInChildren<CinemachineFreeLook>();
         PlayerMovementScript = PlayerContainer.GetComponentInChildren<Movement>();
 
         CamSpeedY = playerCamera.m_YAxis.m_MaxSpeed;
-        CamSpeedX = playerCamera.m_XAxis.m_MaxSpeed;
+        CamSpeedX = playerCamera.m_XAxis.m_MaxSpeed;*/
             
+    }
+
+    public void GetNewPage()
+    {
+        
+    CheckPuzzleCompletion();
+               
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            CheckPuzzleCompletion();
-        }
-
         ToggleBook();
     }
-
     public void CompletePuzzle(int puzzleIndex)
     {
         if (puzzleIndex < 0 || puzzleIndex >= puzzleCompletionStatus.Length)
@@ -95,7 +97,7 @@ public class PageManager : MonoBehaviour
         else
         {
             leftPage.sprite = placeholderSprite;
-            Debug.Log("L: Placeholder");
+            
         }
 
         // Check if the right page is unlocked
@@ -107,7 +109,7 @@ public class PageManager : MonoBehaviour
         else
         {
             rightPage.sprite = placeholderSprite;
-            Debug.Log("R: Placeholder");
+            
         }
     }
 

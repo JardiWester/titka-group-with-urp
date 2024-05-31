@@ -17,7 +17,7 @@ public class InputUIManager : MonoBehaviour
     }
 
     // Function to show the logo
-    public void ShowLogo(Vector3 position)
+    public void ShowLogo()
     {
         // Make sure the logo prefab is assigned and it's not already loaded
         if (KeybindIndicator != null && !isLoaded)

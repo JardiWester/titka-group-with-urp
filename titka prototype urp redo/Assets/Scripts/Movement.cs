@@ -8,7 +8,8 @@ public class Movement : MonoBehaviour
     float turnSmoothVelocity;
 
     [SerializeField] private float gravity = -9.8f;
-    [SerializeField] private float speed = 6f;
+    [SerializeField] private float speed = 8f;
+    [SerializeField] private float sprintSpeed = 13f;
     [SerializeField] private float jumpHeight = 3f;
     Vector3 velocity;
     bool isGrounded;
@@ -16,49 +17,69 @@ public class Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public Animator playerAnim;
 
-void Start()
-{
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
-}
+    void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        //walk
+        // Ground check using Raycast
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, out RaycastHit hit, groundDistance, groundMask);
+
+        if (isGrounded)
+        {
+            playerAnim.SetBool("jumpAnim", false);
+            //playerAnim.SetBool("runJumpAnim", false);
+        }
+
+        // Walk
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        //jump
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        // Check if sprinting
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
+        // Calculate speed
+        float currentSpeed = isSprinting ? sprintSpeed : speed;
 
+        // Jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            playerAnim.SetBool("jumpAnim", true);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Debug.Log("jump now");
         }
-        //gravity
+
+        // Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-
-
         if (direction.magnitude >= 0.1f)
         {
+            playerAnim.SetBool("AnimWalk", true);
+            playerAnim.SetBool("RunAnim", false);
+            if (isSprinting)
+            {
+                playerAnim.SetBool("AnimWalk", false);
+                playerAnim.SetBool("RunAnim", true);
+            }
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
         }
-
-        
+        else
+        {
+            playerAnim.SetBool("AnimWalk", false);
+            playerAnim.SetBool("RunAnim", false);
+        }
     }
 }

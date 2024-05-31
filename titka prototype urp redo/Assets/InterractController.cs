@@ -56,7 +56,8 @@ public class InterractController : MonoBehaviour
                         
                         puzzles[i].GetComponent<Interractable>().glow();
                         Debug.Log("Player is close to puzzle " + (i + 1));
-                        InputUIManager.ShowLogo(new Vector3 (puzzles[i].position.x , puzzles[i].position.y + 2, puzzles[i].position.z) ) ;
+                        InputUIManager=puzzles[i].GetComponentInChildren<InputUIManager>();
+                        InputUIManager.ShowLogo() ;
                     }
 
                     // Check if the player presses the interaction key

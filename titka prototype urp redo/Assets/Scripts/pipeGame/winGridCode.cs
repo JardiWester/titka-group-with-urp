@@ -1,52 +1,90 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
+
+
+[System.Serializable]
+public class Index
+{
+    public int value;
+}
 
 public class winGridCode : MonoBehaviour
 {
     private bool winCheck = false;
-    [SerializeField] private List<GameObject> winTriggersInGrid;
+    [SerializeField] private List<GameObject> winTriggersInGrid = new List<GameObject>();
     [SerializeField] private bool allAreConnected;
     [SerializeField] private GameObject winIndicator;
-    //public Sprite WinPage;
     public bool hasToBeConnected = true;
-    public PageManager PageManager;
-    
+    public bool hasToHaveCorectRotation = false;
+    [SerializeField] private bool InBoat;
+    [SerializeField] private PageManager pageManager;
+
+    [SerializeField] public Index WinPageNumber;
 
     void Start()
     {
-        //put all the wintriggers in a list
+        // Initialize winTriggersInGrid
         foreach (Transform child in transform)
         {
             winTriggersInGrid.Add(child.gameObject);
+        }
+
+        // Ensure WinPageNumber is initialized
+        if (WinPageNumber == null)
+        {
+            WinPageNumber = new Index();
+        }
+
+        // Ensure pageManager is assigned (you can assign it in the Inspector or find it by code)
+        if (pageManager == null)
+        {
+            pageManager = FindObjectOfType<PageManager>();
+            if (pageManager == null)
+            {
+                Debug.LogError("PageManager not found in the scene.");
+            }
+        }
+
+        // Ensure puzzleCompletionStatus is initialized
+        if (pageManager.puzzleDone == null)
+        {
+            //pageManager.puzzleDone = new Dictionary<int, bool>();
         }
     }
 
     void Update()
     {
-        //the same as all others, it first set this to true
+        // Check all winTriggers
         allAreConnected = true;
         foreach (GameObject winTrigger in winTriggersInGrid)
         {
-            //it then checks all connected wintriggers
-            if (winTrigger.GetComponent<winTriggerCode>().connected == false)
+            if (!winTrigger.GetComponent<winTriggerCode>().connected)
             {
-                //if any of them arent connected, it sets it to false
                 allAreConnected = false;
                 break;
-                //stop checking, it is futile, you've already lost, it's too late
             }
         }
 
-        if (allAreConnected == true && winCheck == false)
+        if (allAreConnected && !winCheck)
         {
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
-            cameraTransitions.Instance.resetCameras();
-            //PageManager.CompletePuzzle(1);
+
+            cameraTransitions.Instance.resetCameras(InBoat);
+
+            // Ensure WinPageNumber has a valid value
+            if (WinPageNumber != null)
+            {
+                pageManager.puzzleDone[WinPageNumber.value] = true;
+                pageManager.GetNewPage();
+            }
+            else
+            {
+                Debug.LogError("WinPageNumber is null.");
+            }
         }
-
     }
-
 }

@@ -81,9 +81,10 @@ public class cameraTransitions : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
+        if (activeCam){
         activeCam.Priority = 0;
         activeCam = null;
+        }
 
         if (turnOnBoatCamera)
         {

@@ -23,6 +23,7 @@ public class winGridCode : MonoBehaviour
     [SerializeField] private PageManager pageManager;
 
     [SerializeField] public Index WinPageNumber;
+    private bool inpuzzle;
 
     void Start()
     {
@@ -85,6 +86,23 @@ public class winGridCode : MonoBehaviour
             {
                 Debug.LogError("WinPageNumber is null.");
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && gameObject.transform.parent.GetComponent<Interractable>().hasInteracted && !winCheck)
+        {
+            cameraTransitions.Instance.resetCameras(InBoat);
+
+            // Ensure WinPageNumber has a valid value
+            if (WinPageNumber != null)
+            {
+                pageManager.puzzleDone[WinPageNumber.value] = true;
+                pageManager.GetNewPage();
+            }
+            else
+            {
+                Debug.LogError("WinPageNumber is null.");
+            }
+            gameObject.transform.parent.GetComponent<Interractable>().hasInteracted = false;
         }
     }
 }

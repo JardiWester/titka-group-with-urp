@@ -69,6 +69,7 @@ public class InterractController : MonoBehaviour
                         interractables[i].interract();
                         InputUIManager.HideLogo();
                         
+                        
                     }
                 }
                 else

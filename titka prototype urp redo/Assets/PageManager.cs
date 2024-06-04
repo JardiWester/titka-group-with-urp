@@ -20,7 +20,7 @@ public class PageManager : MonoBehaviour
     //private float CamSpeedX;
     //private float CamSpeedY;
     private int currentFullPageIndex = 0; // To track the current full page being displayed
-
+    public GameObject[] pageNo;
     void Start()
     {
         // Initialize all puzzles as incomplete
@@ -87,6 +87,26 @@ public class PageManager : MonoBehaviour
     {
         int leftPageIndex = fullPageIndex * 2;
         int rightPageIndex = leftPageIndex + 1;
+
+        if (fullPageIndex == 0)
+        {
+            //show page numbers
+            pageNo[0].SetActive(true);
+            pageNo[1].SetActive(false);
+            pageNo[2].SetActive(false);
+        }
+        else if (fullPageIndex == 1)
+        {
+            pageNo[1].SetActive(true);
+            pageNo[0].SetActive(false);
+            pageNo[2].SetActive(false);
+        }
+        else if(fullPageIndex == 2)
+        {
+            pageNo[2].SetActive(true);
+            pageNo[1].SetActive(false);
+            pageNo[0].SetActive(false);
+        }
 
         // Check if the left page is unlocked
         if (leftPageIndex < puzzleCompletionStatus.Length && puzzleCompletionStatus[leftPageIndex])
@@ -161,5 +181,11 @@ public class PageManager : MonoBehaviour
             }
            
         }
+
+        
+
+
     }
+
+    
 }

@@ -55,7 +55,7 @@ public class InterractController : MonoBehaviour
                         inRangeStatus[i] = true;
                         
                         puzzles[i].GetComponent<Interractable>().glow();
-                        Debug.Log("Player is close to puzzle " + (i + 1));
+                       
                         InputUIManager=puzzles[i].GetComponentInChildren<InputUIManager>();
                         InputUIManager.ShowLogo() ;
                     }
@@ -79,7 +79,7 @@ public class InterractController : MonoBehaviour
                     {
                         puzzles[i].GetComponent<Interractable>().ResetMaterial();
                         inRangeStatus[i] = false;
-                        Debug.Log("Player is not close to Cave " + (i + 1));
+                        
                         InputUIManager.HideLogo();
                     }
                 }

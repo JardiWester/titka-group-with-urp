@@ -23,7 +23,7 @@ public class Interractable : MonoBehaviour
     public bool oneTimeInteraction;
     public bool hasInteracted = false;
     public bool ActivateDialogue = false;
-
+    public InputUIManager InputUIManager;
     //public CinemachineFreeLook freeLookCamera;
 
     //[SerializeField] private CinemachineVirtualCamera newCam;
@@ -45,6 +45,7 @@ public class Interractable : MonoBehaviour
         // Check if the object has the "Puzzle" tag
         if (gameObject.CompareTag("Puzzle"))
         {
+            InputUIManager.exclamationMark.SetActive(false);
             if (oneTimeInteraction)
             {
                 hasInteracted = true;
@@ -53,7 +54,7 @@ public class Interractable : MonoBehaviour
 
             cameraTransitions.Instance.switchCameras(newCam, true);
             ActivateDialogue = true;
-            Debug.Log("activate dialogue");
+            
 
             if (objectRenderer != null && glowingMaterial != null)
             {
@@ -67,10 +68,11 @@ public class Interractable : MonoBehaviour
         else if (gameObject.CompareTag("Ride"))
 
         {
+            InputUIManager.exclamationMark.SetActive(false);
 
             if (SitHere != null & satDown == false)
             {
-                Debug.Log("sit on the ride");
+                
                 //get on the boat
                 player.SetParent(SitHere);
                 player.position = SitHere.position;
@@ -107,6 +109,7 @@ public class Interractable : MonoBehaviour
         }
         else if (gameObject.CompareTag("Interact"))
         {
+            InputUIManager.exclamationMark.SetActive(false);
 
             if (objectRenderer != null && glowingMaterial != null)
             {

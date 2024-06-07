@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public Animator playerAnim;
+    //public SFX SFX;
 
     void Start()
     {
@@ -63,10 +64,13 @@ public class Movement : MonoBehaviour
         {
             playerAnim.SetBool("AnimWalk", true);
             playerAnim.SetBool("RunAnim", false);
+            //SFX.PlayWalkSound();
+
             if (isSprinting)
             {
                 playerAnim.SetBool("AnimWalk", false);
                 playerAnim.SetBool("RunAnim", true);
+                //SFX.PlayRunSound();
             }
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -80,6 +84,7 @@ public class Movement : MonoBehaviour
         {
             playerAnim.SetBool("AnimWalk", false);
             playerAnim.SetBool("RunAnim", false);
+            //SFX.StopSound();
         }
     }
 }

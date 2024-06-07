@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +24,8 @@ public class winGridCode : MonoBehaviour
 
     [SerializeField] public Index WinPageNumber;
     private bool inpuzzle;
-    public InputUIManager PuzzleInputUIIndicator;
+    public bool fade;
+
     void Start()
     {
         // Initialize winTriggersInGrid
@@ -73,13 +74,15 @@ public class winGridCode : MonoBehaviour
         {
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
-            PuzzleInputUIIndicator.exclamationMark.SetActive(false);
+
             cameraTransitions.Instance.resetCameras(InBoat);
 
             // Ensure WinPageNumber has a valid value
             if (WinPageNumber != null)
             {
-                pageManager.puzzleDone[WinPageNumber.value] = true;
+                fade = true;
+                pageManager.OpenBook();
+                pageManager.puzzleDone[WinPageNumber.value] = true;                
                 pageManager.GetNewPage();
                 
             }

@@ -51,7 +51,7 @@ public class InputUIManager : MonoBehaviour
 
         // Make the logo always face the player camera
         gameObject.transform.LookAt(Camera.main.transform);
-        //exclamationMark.transform.LookAt(Camera.main.transform);
+        
     }
 
 }

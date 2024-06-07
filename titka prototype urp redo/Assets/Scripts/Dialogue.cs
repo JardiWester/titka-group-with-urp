@@ -11,7 +11,9 @@ public class Dialogue : MonoBehaviour
     public GameObject Dialoguee;
     private int index;
     public Interractable PuzzleInterractableScript;
-
+    public GameObject player;
+    public GameObject dialogueTrigger;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -56,8 +58,8 @@ public class Dialogue : MonoBehaviour
     // Type things one by one
     foreach (char c in lines[index]. ToCharArray()) 
         {
-            textComponent.text += c; 
-            yield return new WaitForSeconds (textSpeed) ;
+            textComponent.text += c;
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
     
@@ -71,7 +73,42 @@ public class Dialogue : MonoBehaviour
         }
         else 
         { 
-            Dialoguee.SetActive(false);
+           Dialoguee.SetActive(false);
+           dialogueTrigger.SetActive(false);
+            Time.timeScale = 1f;
+            //player.GetComponent<Movement>().enabled = true;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the colliding object is the one we are interested in
+        if (other.gameObject == player)
+        {
+            
+            Dialoguee.SetActive(true);
+            StartDialogue();
+            //player.GetComponent<Movement>().enabled = false;
+            Time.timeScale = 0f;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (textComponent.text == lines[index])
+                {
+                    NextLine();
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    textComponent.text = lines[index];
+                    Dialoguee.SetActive(false);
+                    
+
+                }
+            }
+        }
+        
+    }
+
+
 }

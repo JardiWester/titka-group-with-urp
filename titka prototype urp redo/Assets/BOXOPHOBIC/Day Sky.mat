@@ -113,8 +113,8 @@ Material:
     - _EnableStarsRotation: 0
     - _EnableStarsTwinkling: 1
     - _EnableSun: 1
-    - _EquatorHeight: 0.5
-    - _EquatorSmoothness: 0.5
+    - _EquatorHeight: 1
+    - _EquatorSmoothness: 0.01
     - _FogCat: 1
     - _FogFill: 0
     - _FogHeight: 0

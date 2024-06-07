@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +24,7 @@ public class winGridCode : MonoBehaviour
 
     [SerializeField] public Index WinPageNumber;
     private bool inpuzzle;
+    public bool fade;
 
     void Start()
     {
@@ -79,8 +80,11 @@ public class winGridCode : MonoBehaviour
             // Ensure WinPageNumber has a valid value
             if (WinPageNumber != null)
             {
-                pageManager.puzzleDone[WinPageNumber.value] = true;
+                fade = true;
+                pageManager.OpenBook();
+                pageManager.puzzleDone[WinPageNumber.value] = true;                
                 pageManager.GetNewPage();
+                
             }
             else
             {

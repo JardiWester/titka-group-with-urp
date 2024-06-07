@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class boatFollow : MonoBehaviour
 {
-    [SerializeField] private Transform[] routes;
+    [SerializeField] private GameObject routeParent;
+    [SerializeField] private List<Transform> routes;
 
     private int routeToGo;
 
@@ -12,18 +13,25 @@ public class boatFollow : MonoBehaviour
 
     private Vector3 objectPosition;
 
-    private float speedModifier;
+    [SerializeField] private float speedModifier = 0.2f;
 
     public bool coroutineAllowed;
     private Vector3 oldPos;
     private float oldRotation;
+    public bool moveAllowed;
 
     void Start()
     {
         oldRotation = gameObject.transform.rotation.y;
         routeToGo = 0;
         tParam = 0f;
-        speedModifier = 0.2f;
+        foreach(Transform Route in routeParent.transform.GetComponentsInChildren<Transform>())
+        {
+            if(Route.gameObject.tag == "routepart")
+            {
+                routes.Add(Route);
+            }
+        }
     }
 
     void Update()
@@ -45,26 +53,59 @@ public class boatFollow : MonoBehaviour
         Vector3 p2 = routes[routeNum].GetChild(2).position;
         Vector3 p3 = routes[routeNum].GetChild(3).position;
 
-        while(tParam < 1)
+        while(tParam < 1.000000000001 && tParam >= 0 && moveAllowed)
         {
-            tParam += Time.deltaTime * speedModifier;
+            float vertical = Input.GetAxisRaw("Vertical");
+            tParam += Time.deltaTime * speedModifier * vertical;
 
             objectPosition = Mathf.Pow(1 - tParam, 3) * p0 + 3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 + 3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 + Mathf.Pow(tParam, 3) * p3;
             transform.position = objectPosition;
-            transform.LookAt(new Vector3(oldPos.x, oldPos.y, oldPos.z));
+            if (vertical > 0)
+            {
+                transform.LookAt(new Vector3(oldPos.x, oldPos.y, oldPos.z));
+            }else {
+                float tempTParam = tParam - Time.deltaTime * speedModifier;
+                Vector3 tempPossition = Mathf.Pow(1 - tempTParam, 3) * p0 + 3 * Mathf.Pow(1 - tempTParam, 2) * tempTParam * p1 + 3 * (1 - tempTParam) * Mathf.Pow(tempTParam, 2) * p2 + Mathf.Pow(tempTParam, 3) * p3;
+                transform.LookAt(tempPossition);
+            }
             oldPos = objectPosition;
-            yield return new WaitForEndOfFrame();
+            
+            if (!moveAllowed)
+            {
+                coroutineAllowed = false;
+                break;
+            }else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
         }
+        if (moveAllowed){
+            if (tParam > 1)    {
+                tParam = 0f;
 
-        tParam = 0f;
+                routeToGo += 1;
 
-        routeToGo += 1;
+                if(routeToGo > routes.Count - 1)
+                {
+                    routeToGo = 0;
+                }
+            }else{
+                tParam = 1f;
+                routeToGo -= 1;
 
-        if(routeToGo > routes.Length - 1)
+                if(routeToGo < 0)
+                {
+                    routeToGo = routes.Count - 1;
+                }
+            }
+
+            coroutineAllowed = true;
+        } else
         {
+            tParam = 0;
             routeToGo = 0;
+            coroutineAllowed = false;
         }
-
-        coroutineAllowed = true;
     }
 }

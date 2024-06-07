@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 2100000, guid: ee3793c1570190b48b9872995a1e86df, type: 2}
   m_ModifiedSerializedProperties: 16
   m_ValidKeywords:
-  - _RECEIVE_SHADOWS_OFF
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -45,7 +44,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Parallax: 0.005
-    - _ReceiveShadows: 0
+    - _ReceiveShadows: 1
     - _SrcBlend: 5
     - _Surface: 1
     - _ZWrite: 0

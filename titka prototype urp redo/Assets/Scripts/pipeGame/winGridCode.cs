@@ -14,7 +14,7 @@ public class Index
 public class winGridCode : MonoBehaviour
 {
     private bool winCheck = false;
-    [SerializeField] private List<GameObject> winTriggersInGrid = new List<GameObject>();
+    public List<GameObject> winTriggersInGrid = new List<GameObject>();
     [SerializeField] private bool allAreConnected;
     [SerializeField] private GameObject winIndicator;
     public bool hasToBeConnected = true;

@@ -15,11 +15,15 @@ public class winTriggerCode : MonoBehaviour
 
     void Update()
     {
-        currentRotation = new Vector3 (connectedScript.gameObject.transform.rotation.eulerAngles.x, connectedScript.gameObject.transform.rotation.eulerAngles.y, connectedScript.gameObject.transform.rotation.eulerAngles.z);
+        //currentRotation = new Vector3 (connectedScript.gameObject.transform.rotation.eulerAngles.x, connectedScript.gameObject.transform.rotation.eulerAngles.y, connectedScript.gameObject.transform.rotation.eulerAngles.z);
         //if it has found a connected pipe, and the connected variable is set to true
-        if (connectedScript)
+        if (connectedScript && gameObject.transform.parent)
         {
-            if (gameObject.transform.parent.GetComponent<winGridCode>().hasToHaveCorectRotation && new Vector3 (connectedScript.gameObject.transform.rotation.eulerAngles.x, connectedScript.gameObject.transform.rotation.eulerAngles.y, connectedScript.gameObject.transform.rotation.eulerAngles.z) != targetRotation)
+            Quaternion currentRotation = connectedScript.gameObject.transform.rotation;
+
+            Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
+
+            if (gameObject.transform.parent.GetComponent<winGridCode>().hasToHaveCorectRotation && Quaternion.Angle(currentRotation, targetQuaternion) > 1f)
             {
                 allAreConnected = false;
             } else if(connected == false && gameObject.GetComponentInParent<winGridCode>().hasToBeConnected)

@@ -916,6 +916,7 @@ MonoBehaviour:
   conected: 0
   isResetting: 0
   targetRotation: {x: 0, y: 0, z: 0}
+  smoothTime: 1000
 --- !u!1 &6968606743770306262
 GameObject:
   m_ObjectHideFlags: 0

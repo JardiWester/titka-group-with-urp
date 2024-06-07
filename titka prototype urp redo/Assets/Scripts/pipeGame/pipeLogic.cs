@@ -13,6 +13,11 @@ public class pipeLogic : MonoBehaviour
     public bool conected;
     public bool isResetting = false;
     public Vector3 targetRotation;
+
+    private Quaternion newRotation;
+
+    [SerializeField] float smoothTime;
+    private bool turning = false;
     
 
 
@@ -48,6 +53,20 @@ public class pipeLogic : MonoBehaviour
 
     void Update()
     {
+        if (turning)
+{
+    
+
+    // Smoothly rotate towards the target rotation
+    gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, newRotation, Time.deltaTime * smoothTime);
+
+    // Check if the rotation is approximately equal to the target rotation
+    if (Quaternion.Angle(gameObject.transform.rotation, newRotation) < 0.1f)
+    {
+        transform.parent.GetComponent<gridManager>().resetGrid();
+        turning = false;
+    }
+}
         if (isResetting)
         {
             
@@ -77,8 +96,21 @@ public class pipeLogic : MonoBehaviour
 
     private void OnMouseDown()
     { 
-        transform.Rotate(0f, 0f, -90f);
-        transform.parent.GetComponent<gridManager>().resetGrid();
+        
+        // Get the current rotation in Euler angles
+    Vector3 currentRotation = gameObject.transform.eulerAngles;
+    Vector3 targetEulerAngles;
+    if (turning)
+    {
+        targetEulerAngles = new Vector3(newRotation.x, newRotation.y, newRotation.z + 90f);
+    }else 
+    {
+        targetEulerAngles = new Vector3(currentRotation.x, currentRotation.y, currentRotation.z + 90f);
+    }
+    turning = true;
+
+    // Create a target rotation quaternion from the modified Euler angles
+    newRotation = Quaternion.Euler(targetEulerAngles);
     }
 
     public void resetConnection()

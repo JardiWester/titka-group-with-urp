@@ -913,6 +913,8 @@ MonoBehaviour:
   hasReset: 0
   conected: 0
   isResetting: 0
+  targetRotation: {x: 0, y: 0, z: 0}
+  smoothTime: 1000
 --- !u!1001 &1184398895786124211
 PrefabInstance:
   m_ObjectHideFlags: 0

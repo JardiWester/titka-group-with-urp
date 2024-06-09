@@ -23,13 +23,13 @@ public class Interractable : MonoBehaviour
     public bool oneTimeInteraction;
     public bool hasInteracted = false;
     public bool ActivateDialogue = false;
-
-    [SerializeField] private GameObject boatCube;
-
+    public InputUIManager InputUIManager;
     //public CinemachineFreeLook freeLookCamera;
 
     //[SerializeField] private CinemachineVirtualCamera newCam;
     [SerializeField] private CinemachineFreeLook playerCam;
+
+    [SerializeField] private GameObject boatCube;
 
     public Animator playerAnim;
     private void Start()
@@ -47,6 +47,8 @@ public class Interractable : MonoBehaviour
         // Check if the object has the "Puzzle" tag
         if (gameObject.CompareTag("Puzzle"))
         {
+            //InputUIManager.enabled = false;
+
             if (oneTimeInteraction)
             {
                 hasInteracted = true;
@@ -55,7 +57,7 @@ public class Interractable : MonoBehaviour
 
             cameraTransitions.Instance.switchCameras(newCam, true);
             ActivateDialogue = true;
-            Debug.Log("activate dialogue");
+            
 
             if (objectRenderer != null && glowingMaterial != null)
             {
@@ -69,10 +71,11 @@ public class Interractable : MonoBehaviour
         else if (gameObject.CompareTag("Ride"))
 
         {
+            //InputUIManager.exclamationMark.SetActive(false);
 
             if (SitHere != null & satDown == false)
             {
-                Debug.Log("sit on the ride");
+                
                 //get on the boat
                 player.SetParent(SitHere);
                 player.position = SitHere.position;
@@ -91,7 +94,7 @@ public class Interractable : MonoBehaviour
 
                 //get off the boat
                 player.SetParent(null);
-                
+
                 boatCube.GetComponent<boatFollow>().moveAllowed = false;
                 boatCube.GetComponent<boatFollow>().coroutineAllowed = false;
 
@@ -100,11 +103,11 @@ public class Interractable : MonoBehaviour
                 boatCube.transform.rotation = Quaternion.identity; // Reset the rotation of the boat 
 
                 satDown = false;
+                playerCam.Priority = 10; //change back tot he player camera
                 playerAnim.SetBool("SitDown", false); // sit down animation
                 player.GetComponent<Movement>().enabled = true; //let the player move again 
                 playerCam.Priority = 1;
                 boatCam.Priority = 0;
-                
             }
             else
             {
@@ -114,6 +117,7 @@ public class Interractable : MonoBehaviour
         }
         else if (gameObject.CompareTag("Interact"))
         {
+            InputUIManager.exclamationMark.SetActive(false);
 
             if (objectRenderer != null && glowingMaterial != null)
             {

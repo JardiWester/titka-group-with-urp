@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float sprintSpeed = 13f;
     [SerializeField] private float jumpHeight = 3f;
     Vector3 velocity;
-    bool isGrounded;
+    [SerializeField] private bool isGrounded;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
         {
             playerAnim.SetBool("jumpAnim", true);
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            Debug.Log("jump now");
+            
         }
 
         // Gravity

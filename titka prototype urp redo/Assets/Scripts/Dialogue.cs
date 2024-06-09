@@ -74,7 +74,7 @@ public class Dialogue : MonoBehaviour
         else 
         { 
            Dialoguee.SetActive(false);
-           dialogueTrigger.SetActive(false);
+           //dialogueTrigger.SetActive(false);
             Time.timeScale = 1f;
             //player.GetComponent<Movement>().enabled = true;
         }

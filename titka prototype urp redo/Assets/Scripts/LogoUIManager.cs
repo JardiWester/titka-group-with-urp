@@ -14,6 +14,9 @@ public class InputUIManager : MonoBehaviour
     {
         KeybindIndicator.SetActive(false);
         exclamationMark.SetActive(true);
+        
+        
+        
     }
 
     // Function to show the logo
@@ -25,6 +28,7 @@ public class InputUIManager : MonoBehaviour
             // Position the logo at the specified position
            // gameObject.transform.position = position ;         
             // Activate the logo
+            
             KeybindIndicator.SetActive(true);
             gameObject.transform.LookAt(Camera.main.transform);           
             isLoaded = true;
@@ -40,6 +44,7 @@ public class InputUIManager : MonoBehaviour
         // Check if the logo is loaded and active
         if (isLoaded && KeybindIndicator.activeSelf)
         {
+            Debug.Log("deacivate input");
             // Deactivate the logo
             KeybindIndicator.SetActive(false);            
             isLoaded = false; // Reset the flag           

@@ -13,11 +13,14 @@ public class PageManager : MonoBehaviour
     public Image leftPage;
     public Image rightPage;
     public Sprite[] pageSprites; // Array to store the sprites for each page 
-    public Sprite placeholderSprite; // Placeholder image for locked pages
+    public Sprite[] placeholderSprite; // Placeholder image for locked pages
     public List<bool> puzzleDone = new List<bool>();
     private bool[] puzzleCompletionStatus; // Array to track puzzle completion
     public GameObject PlayerContainer;
-    
+
+    public Toggle[] Toggles;
+    public GameObject PuzzleList;
+
     private CinemachineFreeLook playerCamera;
     
     private int currentFullPageIndex = 0; // To track the current full page being displayed
@@ -30,6 +33,8 @@ public class PageManager : MonoBehaviour
     public winGridCode winGridCode;
     void Start()
     {
+        PuzzleList.SetActive(false);
+        
         // Initialize all puzzles as incomplete
         puzzleCompletionStatus = new bool[6];
 
@@ -50,6 +55,11 @@ public class PageManager : MonoBehaviour
         }
 
         DisplayPages(currentFullPageIndex); // Display the first set of pages (1 and 2)
+
+        /* if (Toggles == null || Toggles.Length == 0)
+        {
+            Debug.LogError("Toggles array is not assigned or empty.");
+        }*/
     }
 
     public async void GetNewPage()
@@ -75,6 +85,7 @@ public class PageManager : MonoBehaviour
 
         puzzleCompletionStatus[puzzleIndex] = true;
         UpdateComicBook(puzzleIndex);
+        Toggles[puzzleIndex].isOn = true;
     }
 
     public void CheckPuzzleCompletion()
@@ -92,6 +103,7 @@ public class PageManager : MonoBehaviour
     {
         int fullPageIndex = puzzleIndex / 2;
         DisplayPages(fullPageIndex);
+        
     }
 
     private void DisplayPages(int fullPageIndex)
@@ -120,7 +132,7 @@ public class PageManager : MonoBehaviour
         }
         else
         {
-            leftPage.sprite = placeholderSprite;
+            leftPage.sprite = placeholderSprite[leftPageIndex];
             leftPageCanvasGroup.alpha = 1; // Ensure the placeholder is visible
         }
 
@@ -137,7 +149,7 @@ public class PageManager : MonoBehaviour
         }
         else
         {
-            rightPage.sprite = placeholderSprite;
+            rightPage.sprite = placeholderSprite[rightPageIndex];
             rightPageCanvasGroup.alpha = 1; // Ensure the placeholder is visible
         }
     }
@@ -171,6 +183,7 @@ public class PageManager : MonoBehaviour
             { 
                 //open book
                 BookBase.SetActive(true);
+                PuzzleList.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0f;
@@ -179,6 +192,7 @@ public class PageManager : MonoBehaviour
             {
                 //close book
                 BookBase.SetActive(false);
+                PuzzleList.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1f;
@@ -189,12 +203,13 @@ public class PageManager : MonoBehaviour
 
 
     }
-    public void OpenBook()
+    public void OpenBook()   //FOR OPENING THE BOOK AUTOMATICALLY
     {
-        //FOR OPENING THE BOOK AUTOMATICALLY
+      
         
             //open book
             BookBase.SetActive(true);
+            PuzzleList.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;         
             Time.timeScale = 0f;
@@ -203,6 +218,7 @@ public class PageManager : MonoBehaviour
         {
             //close book
             BookBase.SetActive(false);
+            PuzzleList.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;
@@ -219,7 +235,7 @@ public class PageManager : MonoBehaviour
             //Time.timeScale = 1f;
             elapsedTime += Time.unscaledDeltaTime;
             canvasGroup.alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
-            Debug.Log("fade effect");
+           
             yield return null;
 
         }

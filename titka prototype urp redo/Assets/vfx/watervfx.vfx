@@ -1274,7 +1274,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.024157630279660226,"g":0.20507876574993134,"b":0.9911022186279297,"a":1.0}'
+      m_SerializableObject: '{"r":0.0,"g":0.15285281836986543,"b":0.8207547068595886,"a":1.0}'
     m_Space: 2147483647
   m_Property:
     name: _Base_Color
@@ -1444,7 +1444,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.27474188804626467,"g":0.4393357038497925,"b":0.9245283007621765,"a":1.0}'
+      m_SerializableObject: '{"r":0.4710162580013275,"g":0.1933962106704712,"b":1.0,"a":1.0}'
     m_Space: 2147483647
   m_Property:
     name: _MainTexColor

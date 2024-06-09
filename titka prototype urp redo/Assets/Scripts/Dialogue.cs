@@ -18,7 +18,7 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
-        //StartDialogue();
+        
     }
 
     // Update is called once per frame
@@ -42,6 +42,7 @@ public class Dialogue : MonoBehaviour
                 StopAllCoroutines();
                 textComponent.text = lines[index];
                 Dialoguee.SetActive(false);
+                player.GetComponent<Movement>().enabled = true;
             }
         }
 
@@ -50,6 +51,7 @@ public class Dialogue : MonoBehaviour
     void StartDialogue ()
     {
         index = 0;
+        textComponent.text = string.Empty;
         StartCoroutine(TypeLine()); 
     }
 
@@ -76,7 +78,7 @@ public class Dialogue : MonoBehaviour
            Dialoguee.SetActive(false);
            //dialogueTrigger.SetActive(false);
             Time.timeScale = 1f;
-            //player.GetComponent<Movement>().enabled = true;
+            player.GetComponent<Movement>().enabled = true;
         }
     }
 
@@ -88,8 +90,9 @@ public class Dialogue : MonoBehaviour
             
             Dialoguee.SetActive(true);
             StartDialogue();
-            //player.GetComponent<Movement>().enabled = false;
-            Time.timeScale = 0f;
+            player.GetComponent<Movement>().enabled = false;
+            //Time.timeScale = 0f;
+            
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -99,9 +102,9 @@ public class Dialogue : MonoBehaviour
                 }
                 else
                 {
-                    StopAllCoroutines();
+                   /* StopAllCoroutines();
                     textComponent.text = lines[index];
-                    Dialoguee.SetActive(false);
+                    Dialoguee.SetActive(false);*/
                     
 
                 }

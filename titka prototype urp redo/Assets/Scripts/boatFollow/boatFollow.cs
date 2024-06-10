@@ -7,9 +7,9 @@ public class boatFollow : MonoBehaviour
     [SerializeField] private GameObject routeParent;
     [SerializeField] private List<Transform> routes;
 
-    private int routeToGo;
+    [SerializeField] private int routeToGo;
 
-    private float tParam;
+    [SerializeField] private float tParam;
 
     private Vector3 objectPosition;
 
@@ -104,9 +104,7 @@ public class boatFollow : MonoBehaviour
             coroutineAllowed = true;
         } else
         {
-            tParam = 0;
-            routeToGo = 0;
-            coroutineAllowed = false;
+            
         }
     }
 }

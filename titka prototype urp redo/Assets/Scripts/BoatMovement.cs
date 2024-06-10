@@ -22,7 +22,7 @@ public class BoatMovement : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "BoatPark")
         {
@@ -34,7 +34,7 @@ public class BoatMovement : MonoBehaviour
         {
             Debug.Log("park spot name for boat is not set correctly");
         }
-    }
+    }*/
 
     void OnTriggerExit(Collider other)
     {

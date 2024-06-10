@@ -25,6 +25,7 @@ public class Interractable : MonoBehaviour
     public bool ActivateDialogue = false;
     public InputUIManager InputUIManager;
     public GameObject tutorial;
+    public BoatPark BoatPark;
     //public CinemachineFreeLook freeLookCamera;
 
     //[SerializeField] private CinemachineVirtualCamera newCam;
@@ -94,22 +95,21 @@ public class Interractable : MonoBehaviour
                 player.SetParent(null);
 
                 boatCube.GetComponent<boatFollow>().moveAllowed = false;
-                boatCube.GetComponent<boatFollow>().coroutineAllowed = false;
 
-                player.position = teleportPlayer.position; //teleport the player to the shore when boat is parked
-                boatCube.transform.position = ParkHere.position; //teleport the boat to ther parking spot                
+                player.position = BoatPark.teleportPlayer.position; //teleport the player to the shore when boat is parked
+                boatCube.transform.position = BoatPark.ParkHere.position; //teleport the boat to ther parking spot                
                 boatCube.transform.rotation = Quaternion.identity; // Reset the rotation of the boat 
 
                 satDown = false;
-                playerCam.Priority = 10; //change back tot he player camera
+                playerCam.Priority = 1; //change back tot he player camera
                 playerAnim.SetBool("SitDown", false); // sit down animation
                 player.GetComponent<Movement>().enabled = true; //let the player move again 
-                playerCam.Priority = 1;
+                
                 boatCam.Priority = 0;
             }
             else
             {
-                Debug.LogWarning("player or sitHere reference is not set");
+                //Debug.LogWarning("player or sitHere reference is not set");
             }
            
         }

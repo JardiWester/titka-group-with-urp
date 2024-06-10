@@ -43,8 +43,13 @@ public class Dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
-                Dialoguee.SetActive(false);
+                
+
+                if (Dialoguee.activeSelf) 
+                { 
                 player.GetComponent<Movement>().enabled = true;
+                Dialoguee.SetActive(false);
+                }
             }
         }
 

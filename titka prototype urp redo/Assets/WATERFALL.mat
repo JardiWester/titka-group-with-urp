@@ -130,7 +130,7 @@ Material:
     - _foam_scale: 200
     - _mask_scale: 0.1
     - _refraction_opacity: 0
-    - _refractionstrength: 0.05
+    - _refractionstrength: 0
     - _speed: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

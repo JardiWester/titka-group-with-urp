@@ -13,10 +13,7 @@ public class InputUIManager : MonoBehaviour
     private void Start()
     {
         KeybindIndicator.SetActive(false);
-        exclamationMark.SetActive(true);
-        
-        
-        
+        exclamationMark.SetActive(true);               
     }
 
     // Function to show the logo
@@ -53,11 +50,15 @@ public class InputUIManager : MonoBehaviour
 
     void Update()
     {
-
         // Make the logo always face the player camera
         gameObject.transform.LookAt(Camera.main.transform);
         
     }
 
+
+    public void hideExclamation()
+    {
+       exclamationMark.SetActive(false);
+    }
 }
 

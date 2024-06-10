@@ -19,7 +19,7 @@ public class boatFollow : MonoBehaviour
     private Vector3 oldPos;
     private float oldRotation;
     public bool moveAllowed;
-
+    public GameObject tutorial;
     void Start()
     {
         oldRotation = gameObject.transform.rotation.y;
@@ -62,6 +62,7 @@ public class boatFollow : MonoBehaviour
             transform.position = objectPosition;
             if (vertical > 0)
             {
+                tutorial.SetActive(false);
                 transform.LookAt(new Vector3(oldPos.x, oldPos.y, oldPos.z));
             }else {
                 float tempTParam = tParam - Time.deltaTime * speedModifier;

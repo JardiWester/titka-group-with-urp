@@ -10,26 +10,28 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public GameObject Dialoguee;
     private int index;
-    public Interractable PuzzleInterractableScript;
+    public Interractable InterractableScript;
     public GameObject player;
     public GameObject dialogueTrigger;
+    public SFX SFX;
+    [SerializeField] private bool manTalk;
     
     // Start is called before the first frame update
     void Start()
     {
         textComponent.text = string.Empty;
-        //StartDialogue();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ( PuzzleInterractableScript.ActivateDialogue == true) 
+        if ( InterractableScript.ActivateDialogue == true) 
         {
            
             Dialoguee.SetActive (true);
             StartDialogue ();
-            PuzzleInterractableScript.ActivateDialogue = false;
+            InterractableScript.ActivateDialogue = false;
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,7 +43,13 @@ public class Dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
+                
+
+                if (Dialoguee.activeSelf) 
+                { 
+                player.GetComponent<Movement>().enabled = true;
                 Dialoguee.SetActive(false);
+                }
             }
         }
 
@@ -50,6 +58,16 @@ public class Dialogue : MonoBehaviour
     void StartDialogue ()
     {
         index = 0;
+        if (manTalk )
+        {
+            SFX.PlayManHmmSound();
+        }
+        else
+        {
+            SFX.PlayDialogueSound();
+        }
+        
+        textComponent.text = string.Empty;
         StartCoroutine(TypeLine()); 
     }
 
@@ -76,7 +94,7 @@ public class Dialogue : MonoBehaviour
            Dialoguee.SetActive(false);
            //dialogueTrigger.SetActive(false);
             Time.timeScale = 1f;
-            //player.GetComponent<Movement>().enabled = true;
+            player.GetComponent<Movement>().enabled = true;
         }
     }
 
@@ -88,8 +106,9 @@ public class Dialogue : MonoBehaviour
             
             Dialoguee.SetActive(true);
             StartDialogue();
-            //player.GetComponent<Movement>().enabled = false;
-            Time.timeScale = 0f;
+            player.GetComponent<Movement>().enabled = false;
+            //Time.timeScale = 0f;
+            
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -99,9 +118,9 @@ public class Dialogue : MonoBehaviour
                 }
                 else
                 {
-                    StopAllCoroutines();
+                   /* StopAllCoroutines();
                     textComponent.text = lines[index];
-                    Dialoguee.SetActive(false);
+                    Dialoguee.SetActive(false);*/
                     
 
                 }

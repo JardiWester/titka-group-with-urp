@@ -9,17 +9,19 @@ using UnityEngine.UI;
 
 public class PageManager : MonoBehaviour
 { 
-    public GameObject BookBase;
+    public GameObject BOOK;
     public Image leftPage;
     public Image rightPage;
     public Sprite[] pageSprites; // Array to store the sprites for each page 
     public Sprite[] placeholderSprite; // Placeholder image for locked pages
     public List<bool> puzzleDone = new List<bool>();
-    private bool[] puzzleCompletionStatus; // Array to track puzzle completion
+    public bool[] puzzleCompletionStatus; // Array to track puzzle completion
     public GameObject PlayerContainer;
 
     public Toggle[] Toggles;
     public GameObject PuzzleList;
+    [SerializeField] private GameObject mapandbookopen;
+    [SerializeField] private GameObject unlocked;
 
     private CinemachineFreeLook playerCamera;
     
@@ -31,15 +33,18 @@ public class PageManager : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f; // Duration for the fade-in effect
 
     public winGridCode winGridCode;
+    public SFX SFX;
     void Start()
     {
+        
+
         PuzzleList.SetActive(false);
         
         // Initialize all puzzles as incomplete
-        puzzleCompletionStatus = new bool[6];
+        puzzleCompletionStatus = new bool[8];
 
         // Populate the puzzleDone list for testing purposes
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 8; i++)
         {
             puzzleDone.Add(false);
         }
@@ -56,16 +61,16 @@ public class PageManager : MonoBehaviour
 
         DisplayPages(currentFullPageIndex); // Display the first set of pages (1 and 2)
 
-        /* if (Toggles == null || Toggles.Length == 0)
-        {
-            Debug.LogError("Toggles array is not assigned or empty.");
-        }*/
+        //puzzleDone[0] = true;
+        //puzzleDone[7] = true;
+
     }
 
     public async void GetNewPage()
     {
         await Task.Delay(1500);
-        CheckPuzzleCompletion();                              
+        CheckPuzzleCompletion();
+        unlocked.SetActive(true); //"page unlocked" prompt
     }
 
     private void Update()
@@ -159,6 +164,7 @@ public class PageManager : MonoBehaviour
         winGridCode.fade = false;
         if (currentFullPageIndex < pageSprites.Length / 2 - 1)
         {
+            SFX.PlayPageFlipSound();
             currentFullPageIndex++;
             DisplayPages(currentFullPageIndex);
         }
@@ -169,6 +175,7 @@ public class PageManager : MonoBehaviour
         winGridCode.fade = false;
         if (currentFullPageIndex > 0)
         {
+            SFX.PlayPageFlipSound();
             currentFullPageIndex--;
             DisplayPages(currentFullPageIndex);
         }
@@ -176,23 +183,25 @@ public class PageManager : MonoBehaviour
 
     private void ToggleBook()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) & !winGridCode.inpuzzle)
         {
             winGridCode.fade = false;
-            if (BookBase.activeSelf == false)
+            if (BOOK.activeSelf == false)
             { 
                 //open book
-                BookBase.SetActive(true);
+                BOOK.SetActive(true);
                 PuzzleList.SetActive(true);
+                mapandbookopen.SetActive(false);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0f;
             }
-            else if (BookBase.activeSelf == true)
+            else if (BOOK.activeSelf == true)
             {
                 //close book
-                BookBase.SetActive(false);
+                BOOK.SetActive(false);
                 PuzzleList.SetActive(false);
+                mapandbookopen.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1f;
@@ -208,17 +217,21 @@ public class PageManager : MonoBehaviour
       
         
             //open book
-            BookBase.SetActive(true);
+            BOOK.SetActive(true);
             PuzzleList.SetActive(true);
+
+            mapandbookopen.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;         
             Time.timeScale = 0f;
         
-        if (BookBase.activeSelf == true & Input.GetKeyDown(KeyCode.E))
+        if (BOOK.activeSelf == true & Input.GetKeyDown(KeyCode.E))
         {
             //close book
-            BookBase.SetActive(false);
+            BOOK.SetActive(false);
             PuzzleList.SetActive(false);
+            unlocked.SetActive(false);
+            mapandbookopen.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;

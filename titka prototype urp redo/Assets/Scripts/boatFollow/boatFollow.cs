@@ -7,9 +7,9 @@ public class boatFollow : MonoBehaviour
     [SerializeField] private GameObject routeParent;
     [SerializeField] private List<Transform> routes;
 
-    private int routeToGo;
+    [SerializeField] private int routeToGo;
 
-    private float tParam;
+    [SerializeField] private float tParam;
 
     private Vector3 objectPosition;
 
@@ -19,7 +19,7 @@ public class boatFollow : MonoBehaviour
     private Vector3 oldPos;
     private float oldRotation;
     public bool moveAllowed;
-
+    public GameObject tutorial;
     void Start()
     {
         oldRotation = gameObject.transform.rotation.y;
@@ -62,6 +62,7 @@ public class boatFollow : MonoBehaviour
             transform.position = objectPosition;
             if (vertical > 0)
             {
+                tutorial.SetActive(false);
                 transform.LookAt(new Vector3(oldPos.x, oldPos.y, oldPos.z));
             }else {
                 float tempTParam = tParam - Time.deltaTime * speedModifier;
@@ -103,9 +104,7 @@ public class boatFollow : MonoBehaviour
             coroutineAllowed = true;
         } else
         {
-            tParam = 0;
-            routeToGo = 0;
-            coroutineAllowed = false;
+            
         }
     }
 }

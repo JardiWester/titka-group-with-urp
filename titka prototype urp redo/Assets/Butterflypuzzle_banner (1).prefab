@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7455570270109532556
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.498513
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.498513
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.498513
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1861
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 29.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1075.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7103362
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70386267
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -89.475
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 398bd88ea74ef3947b0cb08d83baf258, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39f397fd559866f479ffe010ac2b0fb6, type: 2}
+    - target: {fileID: 919132149155446097, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_Name
+      value: Butterflypuzzle_banner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: 0bf554e8c05e85b4bab16136a79e0e5a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 0bf554e8c05e85b4bab16136a79e0e5a, type: 3}
+    - {fileID: -8700617353114198275, guid: 0bf554e8c05e85b4bab16136a79e0e5a, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0bf554e8c05e85b4bab16136a79e0e5a, type: 3}

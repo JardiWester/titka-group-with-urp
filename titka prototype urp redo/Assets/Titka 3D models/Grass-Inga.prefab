@@ -11,32 +11,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.54042
+      value: 0.8384616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.54042
+      value: 0.8384616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.54042
+      value: 0.8384616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2156.2
+      value: 2072.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.01
+      value: 1.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1098.4
+      value: -745.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
@@ -106,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}
       propertyPath: m_Name
-      value: Grass-Inga
+      value: Grass-IngaDry
       objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: 84f3b2e86ce8b554cb70355a204c65de,
         type: 3}

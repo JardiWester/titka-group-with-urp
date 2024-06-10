@@ -25,7 +25,7 @@ public class winGridCode : MonoBehaviour
     [SerializeField] public Index WinPageNumber;
     public bool inpuzzle;
     public bool fade;
-    
+    public GameObject puzzletutorial;
 
     void Start()
     {
@@ -78,6 +78,7 @@ public class winGridCode : MonoBehaviour
             winCheck = true;
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
             inpuzzle = false;
+            puzzletutorial.SetActive(false); 
             cameraTransitions.Instance.resetCameras(InBoat);
 
             // Ensure WinPageNumber has a valid value
@@ -102,6 +103,7 @@ public class winGridCode : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 inpuzzle = false;
+                puzzletutorial.SetActive(false);
                 cameraTransitions.Instance.resetCameras(InBoat);
 
                 // Ensure WinPageNumber has a valid value

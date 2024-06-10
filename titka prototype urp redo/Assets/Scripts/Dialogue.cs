@@ -10,9 +10,11 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public GameObject Dialoguee;
     private int index;
-    public Interractable PuzzleInterractableScript;
+    public Interractable InterractableScript;
     public GameObject player;
     public GameObject dialogueTrigger;
+    public SFX SFX;
+    [SerializeField] private bool manTalk;
     
     // Start is called before the first frame update
     void Start()
@@ -24,12 +26,12 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ( PuzzleInterractableScript.ActivateDialogue == true) 
+        if ( InterractableScript.ActivateDialogue == true) 
         {
            
             Dialoguee.SetActive (true);
             StartDialogue ();
-            PuzzleInterractableScript.ActivateDialogue = false;
+            InterractableScript.ActivateDialogue = false;
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,8 +43,13 @@ public class Dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
-                Dialoguee.SetActive(false);
+                
+
+                if (Dialoguee.activeSelf) 
+                { 
                 player.GetComponent<Movement>().enabled = true;
+                Dialoguee.SetActive(false);
+                }
             }
         }
 
@@ -51,6 +58,15 @@ public class Dialogue : MonoBehaviour
     void StartDialogue ()
     {
         index = 0;
+        if (manTalk )
+        {
+            SFX.PlayManHmmSound();
+        }
+        else
+        {
+            SFX.PlayDialogueSound();
+        }
+        
         textComponent.text = string.Empty;
         StartCoroutine(TypeLine()); 
     }

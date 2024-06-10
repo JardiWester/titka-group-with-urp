@@ -19,7 +19,7 @@ public class pipeLogic : MonoBehaviour
     [SerializeField] float smoothTime;
     private bool turning = false;
     
-
+    public SFX SFX;
 
 
 
@@ -96,7 +96,7 @@ public class pipeLogic : MonoBehaviour
 
     private void OnMouseDown()
     { 
-        
+        SFX.PlayButtonSound();
         // Get the current rotation in Euler angles
     Vector3 currentRotation = gameObject.transform.eulerAngles;
     Vector3 targetEulerAngles;

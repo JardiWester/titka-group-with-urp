@@ -54,7 +54,7 @@ public class InterractController : MonoBehaviour
                     {
                         inRangeStatus[i] = true;
                         
-                        puzzles[i].GetComponent<Interractable>().glow();
+                        //puzzles[i].GetComponent<Interractable>().glow();
                        
                         InputUIManager=puzzles[i].GetComponentInChildren<InputUIManager>();
                         InputUIManager.ShowLogo() ;
@@ -63,12 +63,12 @@ public class InterractController : MonoBehaviour
                     // Check if the player presses the interaction key
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        puzzles[i].GetComponent<Interractable>().ResetMaterial(); //stop glowing
+                       // puzzles[i].GetComponent<Interractable>().ResetMaterial(); //stop glowing
 
                         // Call the interract method on the interractable instance of the current puzzle
                         interractables[i].interract();
                         InputUIManager.HideLogo();
-                        
+                        InputUIManager.hideExclamation();
                         
                     }
                 }
@@ -77,7 +77,7 @@ public class InterractController : MonoBehaviour
                     // If the player is not in range of this puzzle
                     if (inRangeStatus[i])
                     {
-                        puzzles[i].GetComponent<Interractable>().ResetMaterial();
+                        //puzzles[i].GetComponent<Interractable>().ResetMaterial();
                         inRangeStatus[i] = false;
                         
                         InputUIManager.HideLogo();

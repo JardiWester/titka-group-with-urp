@@ -5,7 +5,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-
+    public winGridCode winGrid;
     public static bool isPaused; 
     // Start is called before the first frame update
     private void Start()
@@ -41,8 +41,11 @@ public class PauseMenu : MonoBehaviour
     { 
         pauseMenu.SetActive(false );
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (winGrid.inpuzzle == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         isPaused = false;   
     }
 

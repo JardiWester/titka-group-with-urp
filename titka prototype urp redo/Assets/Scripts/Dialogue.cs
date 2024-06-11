@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
     [Header("dailogue talking settings")]
-    
+
     private bool manualTalkOrder = false;
     [SerializeField] private bool paigeStarts = true;
     [SerializeField] private bool onlyPaige = false;
@@ -17,7 +17,7 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     [SerializeField] private bool[] talkOrder;
 
-  
+
 
 
     [Header("things that have to be assigned")]
@@ -32,7 +32,7 @@ public class Dialogue : MonoBehaviour
     public SFX SFX;
 
     private bool turnedOn;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,18 +41,20 @@ public class Dialogue : MonoBehaviour
         if (lines.Length == talkOrder.Length)
         {
             manualTalkOrder = true;
-        }else
+        }
+        else
         {
             manualTalkOrder = false;
         }
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(turnedOn){
-            if ( InterractableScript.ActivateDialogue == true) 
+        if (turnedOn)
+        {
+            if (InterractableScript.ActivateDialogue == true)
             {
                 if (manualTalkOrder)
                 {
@@ -61,23 +63,26 @@ public class Dialogue : MonoBehaviour
                         paigeBox.SetActive(true);
                         NPCBox.SetActive(false);
                         paigeStarts = true;
-                    } else 
+                    }
+                    else
                     {
                         paigeStarts = false;
                         paigeBox.SetActive(false);
                         NPCBox.SetActive(true);
                     }
-                } else if (paigeStarts)
+                }
+                else if (paigeStarts)
                 {
                     paigeBox.SetActive(true);
                     NPCBox.SetActive(false);
-                } else 
+                }
+                else
                 {
                     paigeBox.SetActive(false);
                     NPCBox.SetActive(true);
                 }
-                Dialoguee.SetActive (true);
-                StartDialogue ();
+                Dialoguee.SetActive(true);
+                StartDialogue();
                 InterractableScript.ActivateDialogue = false;
             }
             if (Input.GetMouseButtonDown(0))
@@ -96,31 +101,35 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    void StartDialogue ()
+    void StartDialogue()
     {
         index = 0;
-        
-        
-        
+
+
+
         textComponent.text = string.Empty;
-        StartCoroutine(TypeLine()); 
+        StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine() 
-    { 
-        if(manualTalkOrder && talkOrder[index])
+    IEnumerator TypeLine()
+    {
+        if (manualTalkOrder && talkOrder[index])
         {
             NPCBox.SetActive(false);
             paigeBox.SetActive(true);
             SFX.PlayDialogueSound();
-        }else if(paigeStarts){
+        }
+        else if (paigeStarts)
+        {
             NPCBox.SetActive(false);
             paigeBox.SetActive(true);
             SFX.PlayDialogueSound();
-        }else{
+        }
+        else
+        {
             NPCBox.SetActive(true);
             paigeBox.SetActive(false);
-            if (manNPC )
+            if (manNPC)
             {
                 SFX.PlayManHmmSound();
             }
@@ -129,36 +138,41 @@ public class Dialogue : MonoBehaviour
                 SFX.PlayDialogueSound();
             }
         }
-            // Type things one by one
-            foreach (char c in lines[index]. ToCharArray()) 
-            {
-                textComponent.text += c;
-                yield return new WaitForSeconds(textSpeed);
-            }
-        
-        
-    }
-    
-    void NextLine ()
-    {
-        if (index < lines.Length -1 ) 
+        // Type things one by one
+        foreach (char c in lines[index].ToCharArray())
         {
-            
-            index++; 
-            if (!onlyPaige && !manualTalkOrder){
+            textComponent.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
+
+
+    }
+
+    void NextLine()
+    {
+        if (index < lines.Length - 1)
+        {
+
+            index++;
+            if (!onlyPaige && !manualTalkOrder)
+            {
                 paigeStarts = !paigeStarts;
-            } else if (onlyPaige && !manualTalkOrder){
+            }
+            else if (onlyPaige && !manualTalkOrder)
+            {
                 paigeStarts = true;
-            } else{
+            }
+            else
+            {
                 paigeStarts = talkOrder[index];
             }
-            textComponent.text = string.Empty ;
+            textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
         }
-        else 
-        { 
-           Dialoguee.SetActive(false);
-           //dialogueTrigger.SetActive(false);
+        else
+        {
+            Dialoguee.SetActive(false);
+            //dialogueTrigger.SetActive(false);
             //Time.timeScale = 1f;
             turnedOn = false;
             player.GetComponent<Movement>().enabled = true;
@@ -170,14 +184,14 @@ public class Dialogue : MonoBehaviour
         // Check if the colliding object is the one we are interested in
         if (other.gameObject == player)
         {
-            
+
             Dialoguee.SetActive(true);
             turnedOn = true;
             StartDialogue();
             player.GetComponent<Movement>().enabled = false;
             //Time.timeScale = 0f;
         }
-        
+
     }
 
 

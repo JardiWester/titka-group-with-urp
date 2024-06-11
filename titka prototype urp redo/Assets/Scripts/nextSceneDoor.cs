@@ -8,11 +8,9 @@ public class nextSceneDoor : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        //check if collided object has the players movement script
-        if (other.gameObject.GetComponent<Movement>())
-        {
-            //if so, go to the next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (gameObject.CompareTag("JungleEnter")); {
+                //if so, go to the next scene
+                SceneManager.LoadScene(sceneName: "Jurrien_Jungle_Backup");
         }
     }
 }

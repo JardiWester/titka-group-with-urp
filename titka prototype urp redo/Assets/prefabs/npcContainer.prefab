@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 1883515692979208746}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.873535, y: -7.1265182, z: 13.869141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -187,7 +187,6 @@ MonoBehaviour:
   waypoints: []
   waypointIndex: 1
   speed: 0
-  oldPos: {x: 0, y: 0, z: 0}
 --- !u!1 &2039441101759229073
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 6737280565891514122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.873535, y: -7.1265182, z: 13.869141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -345,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 8864467062447175062}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.873535, y: -7.1265182, z: 13.869141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

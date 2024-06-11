@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:titka prototype urp redo/Assets/IMG_0096.png.meta
 guid: f1531044246aefe4694dcd879d9c43c9
+========
+guid: cbfe278018494ed43ae9bc7fb688d69e
+>>>>>>>> 1336b592afec1fbd98e061dc196fe9fcb4b79b49:titka prototype urp redo/Assets/prefabs/pipes/cave/crystal png/slice_0_1_2.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

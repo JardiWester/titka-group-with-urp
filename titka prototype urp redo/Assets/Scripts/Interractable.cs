@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.SceneManagement;
 
 public class Interractable : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Interractable : MonoBehaviour
     public InputUIManager InputUIManager;
     public GameObject tutorial;
     public BoatPark BoatPark;
+    
     //public CinemachineFreeLook freeLookCamera;
 
     //[SerializeField] private CinemachineVirtualCamera newCam;
@@ -36,6 +38,7 @@ public class Interractable : MonoBehaviour
     public Animator playerAnim;
     private void Start()
     {
+        
         /*objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null)
         {
@@ -122,8 +125,7 @@ public class Interractable : MonoBehaviour
                 // Apply glowing material to the object renderer
                 objectRenderer.material = glowingMaterial;
             }*/
-        }
-        else
+        }else
         {
             if (oneTimeInteraction)
             {
@@ -139,6 +141,11 @@ public class Interractable : MonoBehaviour
                 objectRenderer.material = glowingMaterial;
             }*/
         }
+    }
+
+    public void SwitchToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     /*public void glow()

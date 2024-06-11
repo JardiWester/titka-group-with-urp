@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows.WebCam;
 
 public class cameraFollow : MonoBehaviour
 {
@@ -62,8 +63,9 @@ public class cameraFollow : MonoBehaviour
 
         if(routeToGo > routes.Length - 1)
         {
-           // transitionScript.switchCameras();
-        }else{
+            cameraTransitions.Instance.resetCameras();
+        }
+        else{
             coroutineAllowed = true;
         }
 

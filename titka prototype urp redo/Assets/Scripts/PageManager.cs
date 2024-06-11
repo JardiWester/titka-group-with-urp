@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PageManager : MonoBehaviour
@@ -34,9 +35,11 @@ public class PageManager : MonoBehaviour
 
     public winGridCode winGridCode;
     public SFX SFX;
+    public Interractable Interractable;
+    public bool canEndGame = false;
     void Start()
     {
-        
+        canEndGame = false;
 
         PuzzleList.SetActive(false);
         
@@ -61,8 +64,7 @@ public class PageManager : MonoBehaviour
 
         DisplayPages(currentFullPageIndex); // Display the first set of pages (1 and 2)
 
-        //puzzleDone[0] = true;
-        //puzzleDone[7] = true;
+        
 
     }
 
@@ -75,11 +77,23 @@ public class PageManager : MonoBehaviour
 
     private void Update()
     {
-
-        
+               
         ToggleBook();
 
+        for (int i = 1; i <= 6; i++)
+        {
+            if (puzzleDone[i])
+            {
+                Debug.Log("can end game true");
+                canEndGame = true;
+            }
+        }
+       
+
     }
+
+
+    
     public void CompletePuzzle(int puzzleIndex)
     {
         if (puzzleIndex < 0 || puzzleIndex >= puzzleCompletionStatus.Length)
@@ -212,12 +226,12 @@ public class PageManager : MonoBehaviour
 
 
     }
-    public void OpenBook()   //FOR OPENING THE BOOK AUTOMATICALLY
+    public async void OpenBook()   //FOR OPENING THE BOOK AUTOMATICALLY
     {
-      
-        
+
+            await Task.Delay(1000);
             //open book
-            BOOK.SetActive(true);
+             BOOK.SetActive(true);
             PuzzleList.SetActive(true);
 
             mapandbookopen.SetActive(false);

@@ -6,6 +6,7 @@ using UnityEngine;
 public class NPCAnimation : MonoBehaviour
 {
     public Animator animate;
+    //public Animator monkeanim;
     [SerializeField] private bool phone = false;
     [SerializeField] private bool idle = false;
     [SerializeField] private bool idle2 = false;
@@ -18,8 +19,8 @@ public class NPCAnimation : MonoBehaviour
     [SerializeField] private bool breakdance = false;
     [SerializeField] private bool monkewalk = false;
     [SerializeField] private bool walk = false;
+    [SerializeField] private bool monkeswing = false;
 
-    
     private void Update()
     {
         if (phone)
@@ -90,6 +91,11 @@ public class NPCAnimation : MonoBehaviour
         {
             
             animate.SetBool("walk", true);
+            animate.enabled = true;
+        }
+        else if (monkeswing)
+        {
+            animate.SetBool("monkeswing", true);
             animate.enabled = true;
         }
         else

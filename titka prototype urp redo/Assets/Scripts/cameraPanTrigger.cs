@@ -12,10 +12,11 @@ public class cameraPanTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"){
+        if (other.tag == "Ignore"){
             cameraTransitions.Instance.switchCameras(newCam);
             playerMovement.enabled = false;
             camFollowScript.coroutineAllowed = true;
+            gameObject.SetActive(false);
         }
     }
 }

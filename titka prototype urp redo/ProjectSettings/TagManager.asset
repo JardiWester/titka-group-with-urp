@@ -11,6 +11,8 @@ TagManager:
   - pipeTrigger
   - pipe
   - routepart
+  - waypoint
+  - EndLevel
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading.Tasks;
 
 
 [System.Serializable]
@@ -26,6 +26,11 @@ public class winGridCode : MonoBehaviour
     public bool inpuzzle;
     public bool fade;
     public GameObject puzzletutorial;
+    public GameObject FinishedPage;
+    [SerializeField] private float fadeDuration = 0.5f; // Duration for the fade-in effect
+    //public Dialogue dialogue;
+
+    
 
     void Start()
     {
@@ -79,15 +84,22 @@ public class winGridCode : MonoBehaviour
             Debug.Log("YOU WIN!!!!!!!!!!!!!!!!!!!!!");
             inpuzzle = false;
             puzzletutorial.SetActive(false); 
-            cameraTransitions.Instance.resetCameras(InBoat);
+            
+
+            if (FinishedPage != null)
+            {
+                FinishedPage.SetActive(true);
+            }
+
+
+
+            //dialogue.StartDialogue();
 
             // Ensure WinPageNumber has a valid value
             if (WinPageNumber != null)
             {
-                fade = true;
-                pageManager.OpenBook();
-                pageManager.puzzleDone[WinPageNumber.value] = true;                
-                pageManager.GetNewPage();
+                
+                unlockNewPage();
                 
             }
             else
@@ -121,7 +133,38 @@ public class winGridCode : MonoBehaviour
         }
 
 
-
-        
+                
     }
+
+
+    public async void unlockNewPage()
+    {
+        await Task.Delay(1000);
+        fade = true;
+        pageManager.OpenBook();
+        pageManager.puzzleDone[WinPageNumber.value] = true;
+        pageManager.GetNewPage();
+        cameraTransitions.Instance.resetCameras(InBoat);
+    }
+
+
+    private IEnumerator FadeInPage(CanvasGroup canvasGroup) //fade effect
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            //Time.timeScale = 1f;
+            elapsedTime += Time.unscaledDeltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
+
+            yield return null;
+
+        }
+
+        canvasGroup.alpha = 1f;
+        //Time.timeScale = 0f;
+    }
+
+
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Dialogue : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class Dialogue : MonoBehaviour
     {
         if (turnedOn)
         {
-            if (InterractableScript.ActivateDialogue == true)
+            if (InterractableScript && InterractableScript.ActivateDialogue == true)
             {
                 if (manualTalkOrder)
                 {
@@ -184,14 +185,18 @@ public class Dialogue : MonoBehaviour
         // Check if the colliding object is the one we are interested in
         if (other.gameObject == player)
         {
+            triggerDialogue();
+            
+        }
 
-            Dialoguee.SetActive(true);
+    }
+    public void triggerDialogue()
+    {
+        Dialoguee.SetActive(true);
             turnedOn = true;
             StartDialogue();
             player.GetComponent<Movement>().enabled = false;
             //Time.timeScale = 0f;
-        }
-
     }
 
 

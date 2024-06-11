@@ -12,7 +12,6 @@ TagManager:
   - pipe
   - routepart
   - waypoint
-  - JungleEnter
   layers:
   - Default
   - TransparentFX

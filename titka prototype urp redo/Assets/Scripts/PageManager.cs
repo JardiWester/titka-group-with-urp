@@ -195,7 +195,7 @@ public class PageManager : MonoBehaviour
         }
     }
 
-    private void ToggleBook()
+    public void ToggleBook()
     {
         if (Input.GetKeyDown(KeyCode.E) & !winGridCode.inpuzzle)
         {

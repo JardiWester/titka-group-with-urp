@@ -8,9 +8,9 @@ public class nextSceneDoor : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (gameObject.CompareTag("JungleEnter")); {
+        if (other.gameObject.GetComponent<Movement>()) {
                 //if so, go to the next scene
-                SceneManager.LoadScene(sceneName: "Jurrien_Jungle_Backup");
+                SceneManager.LoadScene(sceneName: "FinalJungle");
         }
     }
 }

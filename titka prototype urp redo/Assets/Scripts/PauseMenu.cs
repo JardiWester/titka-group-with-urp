@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public winGridCode winGrid;
     public static bool isPaused;
-    public GameObject controls;
+    //public GameObject controls;
     
     // Start is called before the first frame update
     private void Start()
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame () 
     {
-        controls.SetActive(false);
+        //controls.SetActive(false);
         pauseMenu.SetActive(false );
         Time.timeScale = 1f;
         if (winGrid.inpuzzle == false)
@@ -72,7 +72,7 @@ public class PauseMenu : MonoBehaviour
 
     public void opencontrols()
     {
-       controls.SetActive(true);
+       //controls.SetActive(true);
        pauseMenu.SetActive(false);
        Time.timeScale = 0f;
        Cursor.visible = true;

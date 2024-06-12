@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        SwitchToScene("FinalJungle");
+        SwitchToScene("New_Lobby");
     }
     public void Quit() // Quits the game
     {
